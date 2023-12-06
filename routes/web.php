@@ -20,10 +20,11 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function (){
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('apartments', ApartmentController::class);
-
+    Route::resource('apartments', ApartmentController::class)->parameters([
+        'apartments' => 'apartment:slug'
+    ]);
 });
 
 Route::middleware('auth')->group(function () {
@@ -32,4 +33,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

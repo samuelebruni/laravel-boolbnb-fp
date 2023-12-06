@@ -17,12 +17,14 @@
 </div>
 <div class="card">
     <div class="card-body">
+
         <form action="{{route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data">
 
         @csrf
             <div class="mb-3">
                 <label for="example" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" id="name">
+
             </div>
             <div class="mb-3">
                 <label for="example" class="form-label">Where the apartment is longitude?</label>
@@ -34,15 +36,18 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+
                 <textarea class="form-control" name="description" id="description" rows="3"></textarea>
             </div>
             <div class="mb-3">
                 <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
                 <input type="file" class="form-control" name="cover_image" id="cover_image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Number of rooms</label>
+
                     <input type="number" name="rooms" id="rooms" class="form-control">
                 </div>
                 <div class="col-3 me-5 ms-5">
@@ -52,11 +57,13 @@
                 <div class="col-3 ms-5">
                     <label for="" class="form-lable mb-2">Number of beds</label>
                     <input type="number" name="beds" id="beds" class="form-control">
+
                 </div>
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="mb-2">Indicate the mq</label>
+
                     <input type="number" name="mq" id="mq" class="form-control">
                 </div>
                 <div class="col-3 me-5 ms-5">
@@ -66,6 +73,7 @@
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="mb-2">Number of bathrooms</label>
                     <input type="number" name="bathrooms" id="bathrooms" class="form-control">
+
                 </div>
             </div>
             <button class="btn mt-3 btn_hover text-white" type="submit" style="background-color: #FF385C;"><strong>Save your apartament</strong>
