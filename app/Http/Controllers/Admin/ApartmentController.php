@@ -29,7 +29,7 @@ class ApartmentController extends Controller
     public function create()
     {
         $services = Service::all();
-        return view('admin.apartments.create', compact('services'));
+        return view('admin.apartments.create', compact('services'))->with('message', 'Creazione avvenuta con successo 💚🎉');
     }
 
     /**
@@ -83,7 +83,7 @@ class ApartmentController extends Controller
         }
 
         $apartment->update($validateData);
-        return to_route('admin.apartments.index');
+        return to_route('admin.apartments.index')->with('message', 'Modifica avvenuta con successo 🛠');
     }
 
     /**
@@ -99,7 +99,7 @@ class ApartmentController extends Controller
 
         $apartment->delete();
         
-        return to_route('admin.apartments.index')->with('messagge', 'Cancellazione avvenuta con successo 💥');
+        return to_route('admin.apartments.index')->with('message', 'Cancellazione avvenuta con successo 💥');
     }
 
     /* public function recycle() {
