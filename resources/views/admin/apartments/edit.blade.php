@@ -1,66 +1,86 @@
 @extends('layouts.admin')
 
 @section('content')
-<h2 class="my-5 text-dark text-center">Edit apartament: </h2>
+<div class="mt-5">Edit Apartment NAME 👉 <strong>{{$apartment->name}} 🏡</strong></div>
+<h2 class="my-5 text-dark text-center">Create your profile Apartament</h2>
 
+
+<div>
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                <li> {{$error}} </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
 <div class="card">
     <div class="card-body">
-        <form>
+        <form action="{{route('admin.apartments.update', $apartment)}}" method="POST" enctype="multipart/form-data"">
+        @csrf
+        @method('PUT')
             <div class="mb-3">
                 <label for="example" class="form-label">Name</label>
-                <input type="text" class="form-control" id="exampleInputText" aria-describedby="Text">
+                <input type="text" class="form-control" name="name" id="name" value="{{$apartment->name}}">
             </div>
             <div class="mb-3">
-                <label for="example" class="form-label">Where the apartment is located?</label>
-                <input type="text" class="form-control" id="exampleInputText" aria-describedby="Text">
+                <label for="example" class="form-label">Where the apartment is longitude?</label>
+                <input type="text" class="form-control" name="longitude" id="longitude" value="{{$apartment->longitude}}">
+            </div>
+            <div class="mb-3">
+                <label for="example" class="form-label">Where the apartment is latitude?</label>
+                <input type="text" class="form-control" name="latitude" id="latitude" value="{{$apartment->latitude}}">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="description" id="description" value="{{$apartment->description}}" rows="3"></textarea>
             </div>
-            <div class="mb-3">
-                <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
-                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <div class="mb-3 d-flex">
+                
+                <div class="col-3 me-5">
+                    <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
+                    <input type="file" class="form-control" name="cover_image" id="cover_image" value="{{$apartment->cover_image}}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                </div>
+                
+                <div class="col-3 me-5">
+                    <div>
+                    @if (str_contains($apartment->cover_image, 'http'))
+                        <img width="250" class=" img-fluid" src="{{ $apartment->cover_image }}">
+                    @else
+                        <img width="250" class=" img-fluid" src="{{asset('storage/' . $apartment->cover_image)}}" alt="">
+                    @endif
+                    </div>
+                </div>
+
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Number of rooms</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="rooms" id="rooms" class="form-control" value="{{$apartment->rooms}}">
                 </div>
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="form-lable mb-2">Number of bedrooms</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="bedrooms" id="bedrooms" class="form-control" value="{{$apartment->bedrooms}}">
                 </div>
                 <div class="col-3 ms-5">
                     <label for="" class="form-lable mb-2">Number of beds</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="beds" id="beds" class="form-control" value="{{$apartment->beds}}">
                 </div>
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="mb-2">Indicate the mq</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="mq" id="mq" class="form-control" value="{{$apartment->mq}}">
                 </div>
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="mb-2">Indicate max guests</label>
-                    <input type="text" class="form-control">
+                    <input type="number" name="max_guests" id="max_guests" class="form-control" value="{{$apartment->max_guests}}">
                 </div>
-                <div class="col-3 ms-5">
-                    <label for="" class="mb-2">Indicate if it is a smoking area</label>
-                    <div class="d-flex">
-                        <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Yes
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                No
-                            </label>
-                        </div>
-                    </div>
+                <div class="col-3 me-5 ms-5">
+                    <label for="" class="mb-2">Number of bathrooms</label>
+                    <input type="number" name="bathrooms" id="bathrooms" class="form-control" value="{{$apartment->bathrooms}}">
                 </div>
             </div>
             <button class="btn mt-3 btn_hover text-white" type="submit" style="background-color: #FF385C;"><strong>Save your apartament</strong>

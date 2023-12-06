@@ -23,5 +23,5 @@ class Apartment extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected $fillable = ['name','cover_image','description','latitude','longitude','rooms', 'bedrooms', 'beds', 'bathrooms', 'smokers', 'visible', 'user_id'];
+    protected $fillable = ['name','cover_image','description','latitude','longitude','rooms', 'bedrooms', 'beds', 'bathrooms', 'smokers', 'visible', 'user_id', 'mq', 'max_guests'];
 }

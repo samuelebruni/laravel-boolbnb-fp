@@ -29,16 +29,16 @@
 <body>
     <div id="app">
 
-        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2">
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/"><img src="https://images.squarespace-cdn.com/content/v1/5f40066be3ee131f45d9f373/1599628462715-8GMRSZQXEWFV1788QCFI/bryces_social_mark.png" style="width: 60px" alt="">BoolBnB</a>
+        <header class="navbar navbar-dark sticky-top bg-white flex-md-nowrap p-2 border-bottom">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/"><img src="{{url('/images/boolbnb.png')}}" style="width: 150px" alt=""></a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-nav">
                 <div class="nav-item text-nowrap ms-2">
-                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <a class="nav-link text-black" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                        {{ __('Logout') }} 🚀
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

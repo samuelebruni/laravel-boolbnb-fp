@@ -3,64 +3,77 @@
 @section('content')
 <h2 class="my-5 text-dark text-center">Create your profile Apartament</h2>
 
+
+<div>
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                <li> {{$error}} </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
 <div class="card">
     <div class="card-body">
-        <form action="{{route('admin.apartments.store')}}" method="post" enctype="multipart/form-data">
+
+        <form action="{{route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data">
+
+        @csrf
             <div class="mb-3">
                 <label for="example" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" id="exampleInputText" aria-describedby="Text">
+                <input type="text" class="form-control" name="name" id="name">
+
             </div>
             <div class="mb-3">
-                <label for="example" class="form-label">Where the apartment is located?</label>
-                <input type="text" class="form-control" id="exampleInputText" aria-describedby="Text">
+                <label for="example" class="form-label">Where the apartment is longitude?</label>
+                <input type="text" class="form-control" name="longitude" id="longitude">
+            </div>
+            <div class="mb-3">
+                <label for="example" class="form-label">Where the apartment is latitude?</label>
+                <input type="text" class="form-control" name="latitude" id="latitude">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                <textarea class="form-control" name="description" id="description" rows="3"></textarea>
             </div>
             <div class="mb-3">
                 <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
-                <input type="file" class="form-control" name="cover_image" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                <input type="file" class="form-control" name="cover_image" id="cover_image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Number of rooms</label>
-                    <input type="number" name="rooms" class="form-control">
+
+                    <input type="number" name="rooms" id="rooms" class="form-control">
                 </div>
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="form-lable mb-2">Number of bedrooms</label>
-                    <input type="number" name="bedrooms" class="form-control">
+                    <input type="number" name="bedrooms" id="bedrooms" class="form-control">
                 </div>
                 <div class="col-3 ms-5">
                     <label for="" class="form-lable mb-2">Number of beds</label>
-                    <input type="number" name="beds" class="form-control">
+                    <input type="number" name="beds" id="beds" class="form-control">
+
                 </div>
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="mb-2">Indicate the mq</label>
-                    <input type="number" name="mq" class="form-control">
+
+                    <input type="number" name="mq" id="mq" class="form-control">
                 </div>
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="mb-2">Indicate max guests</label>
-                    <input type="text" name="max_guests" class="form-control">
+                    <input type="number" name="max_guests" id="max_guests" class="form-control">
                 </div>
-                <div class="col-3 ms-5">
-                    <label for="" class="mb-2">Indicate if it is a smoking area</label>
-                    <div class="d-flex">
-                        <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="smokers" value="1" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Yes
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="smokers" value="0" id="flexRadioDefault2" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                No
-                            </label>
-                        </div>
-                    </div>
+                <div class="col-3 me-5 ms-5">
+                    <label for="" class="mb-2">Number of bathrooms</label>
+                    <input type="number" name="bathrooms" id="bathrooms" class="form-control">
+
                 </div>
             </div>
             <button class="btn mt-3 btn_hover text-white" type="submit" style="background-color: #FF385C;"><strong>Save your apartament</strong>

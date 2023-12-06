@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-sm mt-3 col-lg-4">
             <div class="card text-center">
-                <div class="card-header bg-white">Numero Appartamenti</div>
+                <div class="card-header bg-white">Strutture Attive</div>
 
                 <div class="card-body">
                     <h1>
@@ -31,7 +31,7 @@
 
                     <h1>
 
-                        AAAAAA
+                        N/A
                     </h1>
 
 
@@ -47,7 +47,7 @@
 
                     <h1>
 
-                        AAAAAA
+                        N/A
                     </h1>
                 </div>
             </div>
