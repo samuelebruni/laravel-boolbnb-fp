@@ -6,18 +6,33 @@
         {{ __('Dashboard') }}
     </h2>
     <div class="row justify-content-center">
-        <div class="col">
+        <div class="col-sm mt-3 col-lg-4">
             <div class="card">
-                <div class="card-header">{{ __('User Dashboard') }}</div>
+                <div class="card-header bg-white">Numero Appartamenti</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
 
-                    {{ __('You are logged in!') }}
+                    Dioboia!
+                </div>
+            </div>
+        </div>
+        <div class="col-sm mt-3 col-lg-4">
+            <div class="card">
+                <div class="card-header bg-white">Nuovi Messaggi</div>
+
+                <div class="card-body">
+
+                    Dioboia!
+                </div>
+            </div>
+        </div>
+        <div class="col-sm mt-3 col-lg-4">
+            <div class="card">
+                <div class="card-header bg-white">Pagamenti</div>
+
+                <div class="card-body">
+
+                    Dioboia!
                 </div>
             </div>
         </div>
