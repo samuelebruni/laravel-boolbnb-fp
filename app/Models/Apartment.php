@@ -15,4 +15,5 @@ class Apartment extends Model
         return $this->belongsToMany(Service::class);
     }
 
+    protected $fillable = ['name','cover_image','description','latitude','longitude','rooms', 'bedrooms', 'beds', ''];
 }
