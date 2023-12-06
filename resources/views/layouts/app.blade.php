@@ -26,9 +26,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <div class="">
+                    <div class="logo">
                         
-                        <img src="../public/storage/images/logo.png" alt="">
+                        <img src="{{url('/images/logo.png')}}" alt="">   <!-- sostituire con logo finale-->
                         
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
