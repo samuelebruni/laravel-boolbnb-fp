@@ -54,7 +54,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartments'));
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -95,7 +95,7 @@ class ApartmentController extends Controller
             Storage::delete($apartment->cover_image);
         }
 
-        $apartment->sevices()->detach();
+        $apartment->services()->detach();
 
         $apartment->delete();
         
