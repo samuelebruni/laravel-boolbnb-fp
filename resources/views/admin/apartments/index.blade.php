@@ -56,6 +56,11 @@
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">{{$apartment->name}}</h5>
+                    @if($apartment->visible)
+                    <p class="text-success mt-3">Apartment is active</p>
+                    @else
+                    <p class="text-danger mt-3">Apartment is not active</p>
+                    @endif
                     <hr>
                     <div class="d-flex justify-content-around">
                         <a href="{{route('admin.apartments.edit', $apartment->id)}}" class="btn pink">Edit</a>
