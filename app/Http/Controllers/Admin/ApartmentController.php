@@ -49,7 +49,6 @@ class ApartmentController extends Controller
         $apartment->services()->attach($request->services);
 
         return to_route('admin.apartments.index', $apartment);
-
     }
 
     /**
@@ -79,8 +78,8 @@ class ApartmentController extends Controller
         if ($request->has('cover_image')) {
             $path = Storage::put('apartments_thumbs', $request->cover_image);
             $validateData['cover_image'] = $path;
-        } 
-        
+        }
+
         if ($request->has('services')) {
             $apartment->services()->sync($validateData['services']);
         }
