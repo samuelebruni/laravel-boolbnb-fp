@@ -9,7 +9,7 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -18,7 +18,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::where('user_id', Auth::id())->orderByDesc('id');
 
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -42,6 +42,9 @@ class ApartmentController extends Controller
             $file_path = Storage::put('apartments_thumbs', $request->cover_image);
             $validateData['cover_image'] = $file_path;
         }
+
+        $validateData['user_id'] = Auth::id();
+
         $apartment = Apartment::create($validateData);
         $apartment->services()->attach($request->services);
 
@@ -91,15 +94,18 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        if (!is_null($apartment->cover_image)) {
-            Storage::delete($apartment->cover_image);
+        if ($apartment->user_id === Auth::id()) {
+            if (!is_null($apartment->cover_image)) {
+                Storage::delete($apartment->cover_image);
+            }
+    
+            $apartment->services()->detach();
+    
+            $apartment->delete();
+            
+            return to_route('admin.apartments.index')->with('message', 'Cancellazione avvenuta con successo 💥');
         }
-
-        $apartment->services()->detach();
-
-        $apartment->delete();
-        
-        return to_route('admin.apartments.index')->with('message', 'Cancellazione avvenuta con successo 💥');
+        abort(403, "You cannot delete this apartment 📛 it's not yours");
     }
 
     /* public function recycle() {

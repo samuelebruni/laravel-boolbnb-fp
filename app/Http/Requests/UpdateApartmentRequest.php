@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Auth;
 class UpdateApartmentRequest extends FormRequest
 {
     /**
@@ -12,7 +12,7 @@ class UpdateApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->post?->user_id === Auth::id();
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateApartmentRequest extends FormRequest
     {
         return [
             
-            'name' => 'required|min:3|max:50',
+            'name' => ['required', 'min:3', 'max:50', Rule::unique('apartments')->ignore($this->apartment)],
             'description' => 'nullable',
             'services' => 'nullable|exists:services,id',
             'cover_image' => 'nullable',
