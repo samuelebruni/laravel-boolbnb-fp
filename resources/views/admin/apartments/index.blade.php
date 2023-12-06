@@ -13,12 +13,28 @@
         border: 1px solid #ff385c;
         transform: scale(1.05);
     }
+
+    .money {
+        background-color: gold;
+        color: #ff385c;
+    }
+
+    .money:hover {
+        color: #ff385c;
+        border: 1px solid #ff385c;
+        transform: scale(1.05);
+    }
 </style>
 
 <section class="container my-5">
     <div class="d-flex justify-content-between mb-3">
         <h4 class="text-muted text-uppercase">All Apartments</h4>
-        <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
+        <div>
+
+            <a href="{{route('admin.apartments.create')}}" class="btn money me-3">Boost Your Apartment </a>
+            <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
+        </div>
+
     </div>
 
     <div class="my-1">
