@@ -46,7 +46,6 @@ class ApartmentsController extends Controller
         $apartment->services()->attach($request->services);
 
         return to_route('admin.apartments.index', $apartment);
-
     }
 
     /**
@@ -76,8 +75,8 @@ class ApartmentsController extends Controller
         if ($request->has('cover_image')) {
             $path = Storage::put('apartments_thumbs', $request->cover_image);
             $validateData['cover_image'] = $path;
-        } 
-        
+        }
+
         if ($request->has('services')) {
             $apartment->services()->sync($validateData['services']);
         }
@@ -98,7 +97,7 @@ class ApartmentsController extends Controller
         $apartment->sevices()->detach();
 
         $apartment->delete();
-        
+
         return to_route('admin.apartments.index')->with('messagge', 'Cancellazione avvenuta con successo 💥');
     }
 
