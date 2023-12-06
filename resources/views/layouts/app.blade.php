@@ -28,7 +28,7 @@
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo">
                         
-                        <img src="{{url('/images/logo.png')}}" alt="">   <!-- sostituire con logo finale-->
+                        <img src="{{url('/images/boolbnb.png')}}" alt="">   <!-- sostituire con logo finale-->
                         
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
