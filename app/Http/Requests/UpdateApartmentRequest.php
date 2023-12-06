@@ -12,7 +12,7 @@ class UpdateApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->post?->user_id === Auth::id();
+        return $this->apartment?->user_id === Auth::id();
     }
 
     /**
