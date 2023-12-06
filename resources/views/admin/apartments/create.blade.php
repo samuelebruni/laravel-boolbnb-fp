@@ -5,10 +5,10 @@
 
 <div class="card">
     <div class="card-body">
-        <form>
+        <form action="{{route('admin.apartments.store')}}" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="example" class="form-label">Name</label>
-                <input type="text" class="form-control" id="exampleInputText" aria-describedby="Text">
+                <input type="text" class="form-control" name="name" id="exampleInputText" aria-describedby="Text">
             </div>
             <div class="mb-3">
                 <label for="example" class="form-label">Where the apartment is located?</label>
@@ -16,46 +16,46 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div class="mb-3">
                 <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
-                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                <input type="file" class="form-control" name="cover_image" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Number of rooms</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="rooms" class="form-control">
                 </div>
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="form-lable mb-2">Number of bedrooms</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="bedrooms" class="form-control">
                 </div>
                 <div class="col-3 ms-5">
                     <label for="" class="form-lable mb-2">Number of beds</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="beds" class="form-control">
                 </div>
             </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="mb-2">Indicate the mq</label>
-                    <input type="number" class="form-control">
+                    <input type="number" name="mq" class="form-control">
                 </div>
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="mb-2">Indicate max guests</label>
-                    <input type="text" class="form-control">
+                    <input type="text" name="max_guests" class="form-control">
                 </div>
                 <div class="col-3 ms-5">
                     <label for="" class="mb-2">Indicate if it is a smoking area</label>
                     <div class="d-flex">
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="smokers" value="1" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Yes
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <input class="form-check-input" type="radio" name="smokers" value="0" id="flexRadioDefault2" checked>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 No
                             </label>
