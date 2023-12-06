@@ -63,12 +63,28 @@ class ApartmentsController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+        if (!is_null($apartment->cover_image)) {
+            Storage::delete($apartment->cover_image);
+        }
+
+        $apartment->sevices()->detach();
+
         $apartment->delete();
-        return view('admin.apartment.index')->with('destoy_mess', 'Cancellazione avvenuta con successo 💥');
+        
+        return to_route('admin.apartments.index')->with('messagge', 'Cancellazione avvenuta con successo 💥');
     }
 
     /* public function recycle() {
         $trashed = Apartment::onlyTrashed()->orderByDesc('id')->paginate(6);
-        return view('admin.apartment.trashed');
+        return to_route('admin.apartments.trashed');
+    } */
+
+    /* public function restore($id) {
+        $apartment = Apartment::onlyTrashed()->find($id);
+
+        if($apartment) {
+            $apartment->restore();
+            return redirect()->route('apartment.recycle')->with('recycle_mess', 'The project was restored ♻');
+        }
     } */
 }
