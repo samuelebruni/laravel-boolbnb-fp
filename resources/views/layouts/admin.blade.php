@@ -19,6 +19,11 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+
+
+    <!-- tomtom -->
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.63.0/services-and-controls.min.js"></script>
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.63.0/maps/maps.css" />
 </head>
 
 <body>

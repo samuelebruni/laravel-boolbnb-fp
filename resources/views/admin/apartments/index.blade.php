@@ -56,6 +56,7 @@
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">{{$apartment->name}}</h5>
+                    <hr>
                     <div class="d-flex justify-content-around">
                         <a href="{{route('admin.apartments.edit', $apartment->id)}}" class="btn pink">Edit</a>
                         <button type="button" class="btn pink" data-bs-toggle="modal" data-bs-target="#modalId-{{$apartment->id}}">
