@@ -22,6 +22,7 @@ class ApartmentSeeder extends Seeder
             $apartment->description = $faker->realText(200);
             $apartment->cover_image = $faker->imageUrl(640, 480, 'animals', true);
             $apartment->bedrooms = $faker->randomDigitNot(0);
+            $apartment->bathrooms = $faker->randomDigitNot(0);
             $apartment->rooms = $faker->randomDigitNot(0);
             $apartment->beds = $faker->randomDigitNot(0);
             $apartment->mq = $faker->randomDigitNot(0);

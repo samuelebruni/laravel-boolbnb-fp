@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreApartmentRequest;
+use App\Http\Requests\UpdateApartmentRequest;
+use App\Models\Service;
+use Illuminate\Support\Facades\Storage;
+
 
 class ApartmentsController extends Controller
 {
@@ -23,15 +28,25 @@ class ApartmentsController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        if ($request->has('cover_image')) {
+            $file_path = Storage::put('apartments_thumbs', $request->cover_image);
+            $validateData['cover_image'] = $file_path;
+        }
+        $apartment = Apartment::create($validateData);
+        $apartment->services()->attach($request->services);
+
+        return to_route('admin.apartments.index', $apartment);
+
     }
 
     /**
@@ -47,15 +62,28 @@ class ApartmentsController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        $services = Service::all();
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $validateData = $request->validated();
+
+        if ($request->has('cover_image')) {
+            $path = Storage::put('apartments_thumbs', $request->cover_image);
+            $validateData['cover_image'] = $path;
+        } 
+        
+        if ($request->has('services')) {
+            $project->services()->sync($validateData['services']);
+        }
+
+        $apartment->update($validateData);
+        return to_route('admin.apartments.index');
     }
 
     /**

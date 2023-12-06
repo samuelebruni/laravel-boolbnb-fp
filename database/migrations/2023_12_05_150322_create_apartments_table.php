@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('cover_image');
             $table->string('bedrooms');
+            $table->string('bathrooms');
             $table->string('rooms');
             $table->string('beds');
             $table->string('mq');
