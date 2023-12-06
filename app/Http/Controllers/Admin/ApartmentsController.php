@@ -79,7 +79,7 @@ class ApartmentsController extends Controller
         } 
         
         if ($request->has('services')) {
-            $project->services()->sync($validateData['services']);
+            $apartment->services()->sync($validateData['services']);
         }
 
         $apartment->update($validateData);
