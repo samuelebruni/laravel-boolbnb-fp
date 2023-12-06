@@ -21,7 +21,7 @@ class ApartmentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.apartments.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class ApartmentsController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartments'));
     }
 
     /**
