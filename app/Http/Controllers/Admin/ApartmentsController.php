@@ -63,6 +63,12 @@ class ApartmentsController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+        return view('admin.apartment.index')->with('destoy_mess', 'Cancellazione avvenuta con successo 💥');
     }
+
+    /* public function recycle() {
+        $trashed = Apartment::onlyTrashed()->orderByDesc('id')->paginate(6);
+        return view('admin.apartment.trashed');
+    } */
 }
