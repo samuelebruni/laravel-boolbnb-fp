@@ -11,7 +11,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 
 
-class ApartmentsController extends Controller
+class ApartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
