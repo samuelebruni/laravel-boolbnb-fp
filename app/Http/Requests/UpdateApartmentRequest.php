@@ -37,7 +37,7 @@ class UpdateApartmentRequest extends FormRequest
             'mq' => 'nullable',
             'max_guests' => 'nullable',
             'smokers' => 'nullable',
-            'visible' => 'nullable',
+            'visible' => 'required',
         ];
     }
 }

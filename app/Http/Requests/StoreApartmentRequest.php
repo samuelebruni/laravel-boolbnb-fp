@@ -37,7 +37,7 @@ class StoreApartmentRequest extends FormRequest
             'mq' => 'nullable|max:4',
             'max_guests' => 'nullable|max:2',
             'smokers' => 'nullable',
-            'visible' => 'nullable',
+            'visible' => 'required',
         ];
     }
 }

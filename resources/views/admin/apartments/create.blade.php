@@ -4,9 +4,7 @@
 
 
 
-<div>
-    
-</div>
+<h2 class="my-5 text-dark text-center">Create your profile Apartament 🏡</h2>
 <div class="card">
     <div class="card-body">
         <form action="{{route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data">
@@ -100,6 +98,19 @@
                 <div class="col-3 me-5 ms-5">
                     <label for="" class="mb-2">Number of bathrooms</label>
                     <input type="number" name="bathrooms" id="bathrooms" class="form-control" value="{{ old('bathrooms')}}">
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-6 d-flex gap-3">
+                    <label for="" class="mb-2">Does the apartment have to be visible?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="visible" id="visible" value="1" {{ old('visible') == '1' ? 'checked' : '' }} />
+                        <label class="form-check-label" for="">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="visible" id="is_not_visible" value="0" {{ old('visible', 0) == '0' ? 'checked' : '' }} />
+                        <label class="form-check-label" for="">No</label>
+                    </div>
                 </div>
             </div>
             <button class="btn mt-3 btn_hover text-white" type="submit" style="background-color: #FF385C;"><strong>Save your apartament</strong>
