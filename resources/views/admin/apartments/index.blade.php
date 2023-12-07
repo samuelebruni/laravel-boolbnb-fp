@@ -48,31 +48,49 @@
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
 
+
+        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
+
+
         @forelse ($apartments as $apartment)
         <div class="col">
             <div class="card">
                 <a href="{{route('admin.apartments.show', $apartment->id)}}">
                     <img src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
                 </a>
-                <div id="map" style="width: 304px;height: 300px;">a</div>
+
 
 
                 <!-- map -->
-                <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
-                <script>
-                    let center = [12.777289755797641, 43.85677975967643]
-                    tt.setProductInfo("map", "1.0.0")
-                    tt.map({
-                        key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
-                        container: "map",
-                        center: center,
-                        zoom: 16,
-                    })
+                <div id="map-{{$apartment->id}}" style="width: 304px; height: 300px;"></div>
 
-                    map.on('load', () => {
-                        new tt.Marker().setLngLat(center).addTo(map)
-                    })
+
+
+
+                <script>
+                    // Access the dynamic data from the server-side
+                    let apartment = @json($apartment);
+
+
+
+
+
+                    // Set product information
+                    tt.setProductInfo("map", "1.0.0");
+
+                    // Create a map instance
+                    const map = tt.map({
+                        key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
+                        container: "map-" + apartment.id,
+                        center: [apartment.latitude, apartment.longitude], // Use the dynamic latitude and longitude
+                        zoom: 16,
+                    });
+
+
+                    // Add a marker at the specified center coordinates
+                    const marker = new tt.Marker().setLngLat([apartment.latitude, apartment.longitude]).addTo(map);
                 </script>
+
 
                 <!-- map -->
 

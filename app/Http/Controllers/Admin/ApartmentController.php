@@ -96,11 +96,11 @@ class ApartmentController extends Controller
             if (!is_null($apartment->cover_image)) {
                 Storage::delete($apartment->cover_image);
             }
-    
+
             $apartment->services()->detach();
-    
+
             $apartment->delete();
-            
+
             return to_route('admin.apartments.index')->with('message', 'Cancellazione avvenuta con successo 💥');
         }
         abort(403, "You cannot delete this apartment 📛 it's not yours");
