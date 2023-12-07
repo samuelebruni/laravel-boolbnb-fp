@@ -25,11 +25,11 @@ class UpdateApartmentRequest extends FormRequest
         return [
             
             'name' => ['required', 'min:3', 'max:50', Rule::unique('apartments')->ignore($this->apartment)],
-            'description' => 'nullable',
+            'description' => 'nullable|min:2|max:500',
             'services' => 'nullable|exists:services,id',
             'cover_image' => 'nullable',
-            'latitude' => 'nullable',
-            'longitude' => 'nullable',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'rooms' => 'nullable',
             'bedrooms' => 'nullable',
             'bathrooms' => 'nullable',
