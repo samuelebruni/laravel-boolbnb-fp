@@ -45,28 +45,30 @@
 
                 <div class="card-body">
 
-                    <h1>
+                    <h1 id="map">
 
-                        N/A
+
                     </h1>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <div id="map">a</div>
 
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 <script>
-    // Initialize the map
-    var map = tt.map({
-        key: 'WPApwm8lHb7DnfQ5RbyxS9nOlbdisKzH',
-        container: 'map',
-        style: 'tomtom://vector/1/basic-main',
-        center: [0, 0], // Initial center coordinates (longitude, latitude)
-        zoom: 10 // Initial zoom level
-    });
-</script> -->
-
+    let center = [12.777289755797641, 43.85677975967643]
+    tt.setProductInfo("map", "1.0.0")
+    tt.map({
+        key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
+        container: "map",
+        center: center,
+        zoom: 16,
+    })
+    map.on('load', () => {
+        new tt.Marker().setLngLat(center).addTo(map)
+    })
+</script>
 <style>
     .card-body {
         color: #ff385c;
@@ -74,8 +76,8 @@
     }
 
     #map {
-        height: 400px;
-        width: 100%;
+        width: 380px;
+        height: 300px;
     }
 </style>
 @endsection

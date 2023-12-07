@@ -54,6 +54,28 @@
                 <a href="{{route('admin.apartments.show', $apartment->id)}}">
                     <img src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
                 </a>
+                <div id="map" style="width: 304px;height: 300px;">a</div>
+
+
+                <!-- map -->
+                <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
+                <script>
+                    let center = [12.777289755797641, 43.85677975967643]
+                    tt.setProductInfo("map", "1.0.0")
+                    tt.map({
+                        key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
+                        container: "map",
+                        center: center,
+                        zoom: 16,
+                    })
+
+                    map.on('load', () => {
+                        new tt.Marker().setLngLat(center).addTo(map)
+                    })
+                </script>
+
+                <!-- map -->
+
                 <div class="card-body">
                     <h5 class="card-title">{{$apartment->name}}</h5>
                     @if($apartment->visible)
