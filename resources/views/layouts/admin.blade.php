@@ -22,8 +22,8 @@
 
 
     <!-- tomtom -->
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.63.0/services-and-controls.min.js"></script>
-    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.63.0/maps/maps.css" />
+    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css" />
+    <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/services/services-web.min.js"></script>
 </head>
 
 <body>
