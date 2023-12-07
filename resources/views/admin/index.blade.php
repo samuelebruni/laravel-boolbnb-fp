@@ -45,6 +45,7 @@
 
                 <div class="card-body">
 
+
                     <h1>
                         N/A
                     </h1>
@@ -53,15 +54,11 @@
         </div>
     </div>
 </div>
+
 <style>
     .card-body {
         color: #ff385c;
 
-    }
-
-    #map {
-        width: 380px;
-        height: 300px;
     }
 </style>
 @endsection
