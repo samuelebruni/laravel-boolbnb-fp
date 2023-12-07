@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Service extends Model
+class Sponsorship extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'duration', 'price'];
 
-    protected $fillable = ['name'];
-
-    public function apartment(): BelongsToMany
+    public function apartments(): BelongsToMany
     {
         return $this->belongsToMany(Apartment::class);
     }

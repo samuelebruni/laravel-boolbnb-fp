@@ -46,9 +46,7 @@
                 <div class="card-body">
 
 
-
                     <h1>
-
                         N/A
                     </h1>
                 </div>
@@ -56,7 +54,6 @@
         </div>
     </div>
 </div>
-
 
 <style>
     .card-body {
