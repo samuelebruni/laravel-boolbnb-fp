@@ -1,9 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
 
 .logo {
-    width: 100px;
+    width: 200px;
 
     & img {
         width: 100%;
     }
+}
+
+
+
+.bg_primary {
+    background-color: #FE244C;
+}
+
+.text_primary {
+    color: #FE244C;
 }
