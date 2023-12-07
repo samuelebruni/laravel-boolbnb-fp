@@ -27,7 +27,6 @@ class ApartmentSeeder extends Seeder
             $apartment->beds = $faker->randomDigitNot(0);
             $apartment->mq = $faker->randomDigitNot(0);
             $apartment->max_guests = $faker->randomDigitNot(0);;
-            $apartment->smokers = $faker->boolean();
             $apartment->visible = $faker->boolean();
             $apartment->save();
         }

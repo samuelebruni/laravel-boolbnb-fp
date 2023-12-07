@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->text('description')->nullable();
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('beds')->nullable();
             $table->string('mq')->nullable();
             $table->string('max_guests')->nullable();
-            $table->boolean('smokers')->default(false);
             $table->boolean('visible')->default(true);
             $table->timestamps();
         });
