@@ -23,12 +23,12 @@
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="height:80px">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <div class="logo">
+                    <div>
                         
-                        <img src="{{url('/images/boolbnb.png')}}" alt="">   <!-- sostituire con logo finale-->
+                        <img style="height:200px" src="{{url('/images/boolbnb.png')}}" alt="">   <!-- sostituire con logo finale-->
                         
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
@@ -42,7 +42,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text_primary" href="{{url('/') }}">{{ __('Home') }}</a>
+                            <a class="nav-link text_primary" href="{{url('/') }}"></a>
                         </li>
                     </ul>
 
