@@ -46,7 +46,6 @@
                 <div class="card-body">
 
                     <h1>
-
                         N/A
                     </h1>
                 </div>
@@ -54,19 +53,6 @@
         </div>
     </div>
 </div>
-<!-- <div id="map">a</div>
-
-<script>
-    // Initialize the map
-    var map = tt.map({
-        key: 'WPApwm8lHb7DnfQ5RbyxS9nOlbdisKzH',
-        container: 'map',
-        style: 'tomtom://vector/1/basic-main',
-        center: [0, 0], // Initial center coordinates (longitude, latitude)
-        zoom: 10 // Initial zoom level
-    });
-</script> -->
-
 <style>
     .card-body {
         color: #ff385c;
@@ -74,8 +60,8 @@
     }
 
     #map {
-        height: 400px;
-        width: 100%;
+        width: 380px;
+        height: 300px;
     }
 </style>
 @endsection
