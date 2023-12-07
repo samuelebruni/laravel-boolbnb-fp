@@ -44,6 +44,31 @@
                 <input type="file" class="form-control" name="cover_image" id="cover_image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 
             </div>
+            <div class="mb-3">
+
+                <label for="services" class="form-label">Services</label>
+                    <select class="form-select" multiple name="services[]" id="services">
+
+                        <option disabled>Select Services</option>
+
+                        @foreach ($services as $service )
+
+                        @if ($errors->any())
+                        <option value="{{$service->id}}" {{in_array($service->id, old('services', []) )  ? 'selected' : ''}}>{{$service->name}}</option>
+
+                        @else
+                        <option value="{{$service->id}}">
+                            {{$service->name}}
+                        </option>
+                        @endif
+                        @endforeach
+
+                    </select>
+                    @error('services')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+
+            </div>
             <div class="mb-3 d-flex">
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Number of rooms</label>
