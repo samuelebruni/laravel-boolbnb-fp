@@ -5,13 +5,13 @@
 
 
 <div>
-    
+
 </div>
 <div class="card">
     <div class="card-body">
         <form action="{{route('admin.apartments.update', $apartment)}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+            @csrf
+            @method('PUT')
             <div class="mb-3">
                 <label for="example" class="form-label">Name</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') ? old('name') : $apartment->name }}">
@@ -20,18 +20,10 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="example" class="form-label">Where the apartment is longitude?</label>
-                <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" id="longitude" value="{{ old('longitude') ? old('longitude') : $apartment->longitude }}">
-                @error('longitude')
-                <div class="text-danger"> {{$message}} </div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="example" class="form-label">Where the apartment is latitude?</label>
-                <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" id="latitude" value="{{ old('latitude') ? old('latitude') : $apartment->latitude }}">
-                @error('latitude')
-                <div class="text-danger"> {{$message}} </div>
-                @enderror
+                <label for="location" class="form-label">Location</label>
+                <div id="tomtom-searchbox-container"></div>
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
@@ -41,19 +33,19 @@
                 @enderror
             </div>
             <div class="mb-3 d-flex">
-                
+
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
                     <input type="file" class="form-control" name="cover_image" id="cover_image" value="{{ old('cover_image') ? old('cover_image') : $apartment->cover_image }}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                 </div>
-                
+
                 <div class="col-3 me-5">
                     <div>
-                    @if (str_contains($apartment->cover_image, 'http'))
+                        @if (str_contains($apartment->cover_image, 'http'))
                         <img width="250" class=" img-fluid" src="{{ $apartment->cover_image }}">
-                    @else
+                        @else
                         <img width="250" class=" img-fluid" src="{{asset('storage/' . $apartment->cover_image)}}" alt="">
-                    @endif
+                        @endif
                     </div>
                 </div>
 
@@ -62,26 +54,26 @@
             <div class="mb-3">
 
                 <label for="services" class="form-label">Services</label>
-                    <select class="form-select" multiple name="services[]" id="services">
+                <select class="form-select" multiple name="services[]" id="services">
 
-                        <option disabled>Select Services</option>
+                    <option disabled>Select Services</option>
 
-                        @foreach ($services as $service )
+                    @foreach ($services as $service )
 
-                        @if ($errors->any())
-                        <option value="{{$service->id}}" {{in_array($service->id, old('services', []) )  ? 'selected' : ''}}>{{$service->name}}</option>
+                    @if ($errors->any())
+                    <option value="{{$service->id}}" {{in_array($service->id, old('services', []) )  ? 'selected' : ''}}>{{$service->name}}</option>
 
-                        @else
-                        <option value="{{$service->id}}">
-                            {{$service->name}}
-                        </option>
-                        @endif
-                        @endforeach
+                    @else
+                    <option value="{{$service->id}}">
+                        {{$service->name}}
+                    </option>
+                    @endif
+                    @endforeach
 
-                    </select>
-                    @error('services')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                </select>
+                @error('services')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
 
             </div>
 
@@ -132,10 +124,38 @@
                 </svg>
             </button>
 
-            
+
         </form>
     </div>
 </div>
 
+<script>
+    var options = {
+        searchOptions: {
+            key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
+            language: "it-IT",
+            limit: 5,
+        },
+        autocompleteOptions: {
+            key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
+            language: "it-IT",
+        },
+    };
 
+    var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+
+    ttSearchBox.on("tomtom.searchbox.resultselected", function(event) {
+        if (event.data && event.data.result && event.data.result.position) {
+            var position = event.data.result.position;
+
+            // Update the hidden latitude and longitude input fields in the form
+            document.getElementById("latitude").value = position.lat;
+            document.getElementById("longitude").value = position.lng;
+        }
+    });
+
+    // Append the SearchBox to the designated container
+    var searchBoxContainer = document.getElementById("tomtom-searchbox-container");
+    searchBoxContainer.appendChild(ttSearchBox.getSearchBoxHTML());
+</script>
 @endsection

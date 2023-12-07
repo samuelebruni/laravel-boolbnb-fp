@@ -2,13 +2,14 @@
 
 @section('content')
 
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 
 
 <h2 class="my-5 text-dark text-center">Create your profile Apartament 🏡</h2>
 <div class="card">
     <div class="card-body">
         <form action="{{route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data">
-        @csrf
+            @csrf
             <div class="mb-3">
                 <label for="example" class="form-label">Name</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name')}}">
@@ -17,19 +18,12 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="example" class="form-label">Where the apartment is longitude?</label>
-                <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" id="longitude" value="{{ old('longitude') }}">
-                @error('longitude')
-                <div class="text-danger"> {{$message}} </div>
-                @enderror
+                <label for="location" class="form-label">Location</label>
+                <div id="tomtom-searchbox-container"></div>
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
             </div>
-            <div class="mb-3">
-                <label for="example" class="form-label">Where the apartment is latitude?</label>
-                <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" id="latitude" value="{{ old('latitude')  }}">
-                @error('latitude')
-                <div class="text-danger"> {{$message}} </div>
-                @enderror
-            </div>
+
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="3">{{ old('description') }}</textarea>
@@ -38,7 +32,7 @@
                 @enderror
             </div>
             <div class="mb-3 d-flex">
-                
+
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
                     <input type="file" class="form-control" name="cover_image" id="cover_image" value="{{ old('cover_image') }}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -49,26 +43,26 @@
             <div class="mb-3">
 
                 <label for="services" class="form-label">Services</label>
-                    <select class="form-select" multiple name="services[]" id="services">
+                <select class="form-select" multiple name="services[]" id="services">
 
-                        <option disabled>Select Services</option>
+                    <option disabled>Select Services</option>
 
-                        @foreach ($services as $service )
+                    @foreach ($services as $service )
 
-                        @if ($errors->any())
-                        <option value="{{$service->id}}" {{in_array($service->id, old('services', []) )  ? 'selected' : ''}}>{{$service->name}}</option>
+                    @if ($errors->any())
+                    <option value="{{$service->id}}" {{in_array($service->id, old('services', []) )  ? 'selected' : ''}}>{{$service->name}}</option>
 
-                        @else
-                        <option value="{{$service->id}}">
-                            {{$service->name}}
-                        </option>
-                        @endif
-                        @endforeach
+                    @else
+                    <option value="{{$service->id}}">
+                        {{$service->name}}
+                    </option>
+                    @endif
+                    @endforeach
 
-                    </select>
-                    @error('services')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                </select>
+                @error('services')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
 
             </div>
 
@@ -122,6 +116,34 @@
     </div>
 </div>
 
+<script>
+    var options = {
+        searchOptions: {
+            key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
+            language: "it-IT",
+            limit: 5,
+        },
+        autocompleteOptions: {
+            key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
+            language: "it-IT",
+        },
+    };
 
+    var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+
+    ttSearchBox.on("tomtom.searchbox.resultselected", function(event) {
+        if (event.data && event.data.result && event.data.result.position) {
+            var position = event.data.result.position;
+
+            // Update the hidden latitude and longitude input fields in the form
+            document.getElementById("latitude").value = position.lat;
+            document.getElementById("longitude").value = position.lng;
+        }
+    });
+
+    // Append the SearchBox to the designated container
+    var searchBoxContainer = document.getElementById("tomtom-searchbox-container");
+    searchBoxContainer.appendChild(ttSearchBox.getSearchBoxHTML());
+</script>
 
 @endsection

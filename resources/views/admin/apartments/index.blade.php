@@ -82,13 +82,13 @@
                     const map = tt.map({
                         key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
                         container: "map-" + apartment.id,
-                        center: [apartment.latitude, apartment.longitude], // Use the dynamic latitude and longitude
+                        center: [apartment.longitude, apartment.latitude], // Use the dynamic latitude and longitude
                         zoom: 16,
                     });
 
 
                     // Add a marker at the specified center coordinates
-                    const marker = new tt.Marker().setLngLat([apartment.latitude, apartment.longitude]).addTo(map);
+                    const marker = new tt.Marker().setLngLat([apartment.longitude, apartment.latitude]).addTo(map);
                 </script>
 
 
