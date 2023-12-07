@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\API\ApartmentController;
+use App\Http\Controllers\API\ServiceController;
+use App\Models\Apartment;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+route::get('apartment', [ApartmentController::class,'index']);
+
+
+
+route::get('service',[ServiceController::class, 'index']);
