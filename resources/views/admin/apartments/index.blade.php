@@ -88,7 +88,9 @@
 
 
                     // Add a marker at the specified center coordinates
-                    const marker = new tt.Marker().setLngLat([apartment.longitude, apartment.latitude]).addTo(map);
+                    const marker = new tt.Marker({
+                        color: '#ff385c',
+                    }).setLngLat([apartment.longitude, apartment.latitude]).addTo(map);
                 </script>
 
 
