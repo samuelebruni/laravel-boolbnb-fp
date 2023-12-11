@@ -10,7 +10,7 @@ class Image extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['path', 'cover_image'];
+    protected $fillable = ['path', 'cover_image', 'apartment_id'];
 
     public function apartment(): BelongsTo
     {
