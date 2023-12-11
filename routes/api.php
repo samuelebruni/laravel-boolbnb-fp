@@ -20,9 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Apartment
+route::get('apartment', [ApartmentController::class, 'index']);
+Route::get('apartment/{id}', [ApartmentController::class, 'getApartmentById']);
 
-route::get('apartment', [ApartmentController::class,'index']);
-
-
-
-route::get('service',[ServiceController::class, 'index']);
+//Services
+Route::get('service', [ServiceController::class, 'index']);

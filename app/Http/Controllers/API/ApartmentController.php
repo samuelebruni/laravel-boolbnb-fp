@@ -19,6 +19,15 @@ class ApartmentController extends Controller
         ]);
     }
 
+    public function getApartmentById($id)
+    {
+        $apartment = Apartment::with('services')->find($id);
+        return response()->json([
+            'success' => true,
+            'result' => $apartment
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
@@ -26,5 +35,4 @@ class ApartmentController extends Controller
     {
         //
     }
-
 }
