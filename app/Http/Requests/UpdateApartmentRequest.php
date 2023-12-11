@@ -30,6 +30,7 @@ class UpdateApartmentRequest extends FormRequest
             'cover_image' => 'nullable',
             'latitude' => 'required',
             'longitude' => 'required',
+            'municipality' => 'nullable',
             'rooms' => 'nullable',
             'bedrooms' => 'nullable',
             'bathrooms' => 'nullable',

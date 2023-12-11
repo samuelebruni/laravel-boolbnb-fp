@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
+            $table->string('municipality')->nullable();
             $table->text('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('bedrooms')->nullable();
