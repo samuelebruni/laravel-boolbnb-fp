@@ -24,6 +24,8 @@
                 <div id="tomtom-searchbox-container"></div>
                 <input type="hidden" name="latitude" id="latitude">
                 <input type="hidden" name="longitude" id="longitude">
+                <input type="hidden" name="municipality" id="municipality">
+
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
@@ -145,17 +147,23 @@
     var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
 
     ttSearchBox.on("tomtom.searchbox.resultselected", function(event) {
-        if (event.data && event.data.result && event.data.result.position) {
-            var position = event.data.result.position;
+        if (event.data && event.data.result && event.data.result.address) {
+            var address = event.data.result.address;
+
+            // Log the selected result data to the console
 
             // Update the hidden latitude and longitude input fields in the form
-            document.getElementById("latitude").value = position.lat;
-            document.getElementById("longitude").value = position.lng;
+            document.getElementById("latitude").value = event.data.result.position.lat;
+            document.getElementById("longitude").value = event.data.result.position.lng;
+
+            // Extract the municipality from the address and update the input field
+            document.getElementById("municipality").value = address.municipality;
         }
     });
 
     // Append the SearchBox to the designated container
     var searchBoxContainer = document.getElementById("tomtom-searchbox-container");
     searchBoxContainer.appendChild(ttSearchBox.getSearchBoxHTML());
+</script>
 </script>
 @endsection
