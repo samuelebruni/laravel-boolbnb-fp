@@ -66,6 +66,7 @@
                     <h6>{{ $apartment->latitude }}</h6>
                     <h6>{{ $apartment->longitude }}</h6>
                 </div>
+                
 
                 <div class="card-body details_info mx_auto my-5">
                     <div class="d-flex justify-content-between ms_5">
