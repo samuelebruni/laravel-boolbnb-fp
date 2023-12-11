@@ -37,8 +37,12 @@
             <div class="mb-3 d-flex">
 
                 <div class="col-3 me-5">
-                    <label for="" class="form-lable mb-2">Select a photo of the apartment</label>
+                    <label for="" class="form-lable mb-2">Select a main photo of the apartment</label>
                     <input type="file" class="form-control" name="cover_image" id="cover_image" value="{{ old('cover_image') }}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                </div>
+                <div class="col-3 me-5">
+                    <label for="" class="form-lable mb-2">Upload images for the apartments:</label>
+                    <input type="file" id="images" class="form-control" name="images[]" multiple>                
                 </div>
 
             </div>

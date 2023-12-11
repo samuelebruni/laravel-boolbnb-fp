@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Image;
 
 class ApartmentController extends Controller
 {
@@ -41,10 +42,15 @@ class ApartmentController extends Controller
             $file_path = Storage::put('apartments_thumbs', $request->cover_image);
             $validateData['cover_image'] = $file_path;
         }
-
+        
         $validateData['user_id'] = Auth::id();
-
         $apartment = Apartment::create($validateData);
+        if ($images = $request->images) {
+            foreach ($images as $image) {
+                $path = Storage::put('apartments_thumbs', $image);
+                Image::create(['apartment_id' => $apartment->id,'path' => $path,]);
+            }
+        }
         $apartment->services()->attach($request->services);
 
         return to_route('admin.apartments.index', $apartment);
@@ -73,17 +79,26 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         $validateData = $request->validated();
-
         if ($request->has('cover_image')) {
             $path = Storage::put('apartments_thumbs', $request->cover_image);
             $validateData['cover_image'] = $path;
         }
-
         if ($request->has('services')) {
             $apartment->services()->sync($validateData['services']);
         }
 
+        if ($images = $request->images) {
+            foreach ($images as $image) {
+                //dd($apartment->id);
+                $multiplePath = Storage::put('apartments_thumbs', $image);
+                Image::create(['apartment_id' => $apartment->id, 'path' => $multiplePath]);
+                //dd('created!');
+            }
+        }
+
         $apartment->update($validateData);
+
+
         return to_route('admin.apartments.index')->with('message', 'Modifica avvenuta con successo 🛠');
     }
 
@@ -96,8 +111,13 @@ class ApartmentController extends Controller
             if (!is_null($apartment->cover_image)) {
                 Storage::delete($apartment->cover_image);
             }
+            foreach ($apartment->images as $image) {
+                Storage::delete($image->path);
+            }
     
             $apartment->services()->detach();
+
+            $apartment->images()->delete();
     
             $apartment->delete();
             
