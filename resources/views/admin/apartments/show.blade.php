@@ -48,7 +48,14 @@
         }
     </style>
 
-    <div class="mt-3">Show Apartment NAME 👉 <strong>{{ $apartment->name }} 🏡</strong></div>
+    <div class="mt-3 text-center">Show Apartment NAME 👉 <strong>{{ $apartment->name }} 🏡</strong></div>
+    <div class="d-flex gap-3 justify-content-end my-5">
+        <a href="{{ route('admin.apartments.edit', $apartment->id) }}" class="btn pink">Edit</a>
+            <button type="button" class="btn pink" data-bs-toggle="modal"
+                data-bs-target="#modalId-{{ $apartment->id }}">
+                Delete
+            </button>
+    </div>
     <div class="container details_info mt-3">
         <div class="row mx_auto g-4">
             <div class="col-sm-12 col-md-8 col-lg-12 d-flex">
@@ -61,14 +68,20 @@
 
                     <h2 class="card-title text-center my-5">{{ $apartment->name }}</h2>
 
-                    <div class="d-flex justify-content-around my-5">
-                        <a href="{{ route('admin.apartments.edit', $apartment->id) }}" class="btn pink">Edit</a>
-                        <button type="button" class="btn pink" data-bs-toggle="modal"
-                            data-bs-target="#modalId-{{ $apartment->id }}">
-                            Delete
-                        </button>
+                    <div class="row mb-5">
+                        @forelse ($images as $image)
+                            <div class="col-6 g-2">
+                                <img class="img-fluid" src="{{ asset('storage/' . $image->path) }} "
+                                    alt="">
+                            </div>
+                        @empty
+                            <h4>Non sono presenti immagini</h4>
+                        @endforelse
                     </div>
+                
                 </div>
+                
+            
 
 
                 <div class="description">
