@@ -29,21 +29,32 @@
         }
 
         .cover_image {
-            width: 450px;
+            width: 550px;
             height: 350px;
         }
 
         .description {
             margin: 0rem 1rem 0;
         }
-        .show_images{
+
+        .show_images {
             text-decoration-line: underline;
             color: #ff385c;
             cursor: pointer;
         }
+
         .modal-dialog {
             max-width: 800px;
         }
+        .maps_box{
+            width: 600px;
+        }
+        .maps_width{
+            width: 600px;
+            height: 350px;
+            margin: -3rem 0 0;
+        }
+
         /* spacing */
 
         .mx_auto {
@@ -63,28 +74,62 @@
 
                 <div class="title_image">
 
-                    <img class="cover_image" 
+                    <img class="cover_image"
                         src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}"
                         class="card-img-top" alt="Apartment Image">
-                        <p class="show_images" data-bs-toggle="modal" data-bs-target="#exampleModal">Show others images</p>
+                    <p class="show_images" data-bs-toggle="modal" data-bs-target="#exampleModal">Show others images</p>
 
                     <h2 class="card-title text-center my-5">{{ $apartment->name }}</h2>
 
                     <div class="d-flex justify-content-around my-5">
-                        <a href="{{ route('admin.apartments.edit', $apartment->id) }}" class="btn pink">Edit</a>
+                        <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn pink">Edit</a>
                         <button type="button" class="btn pink" data-bs-toggle="modal"
                             data-bs-target="#modalId-{{ $apartment->id }}">
                             Delete
                         </button>
+
+                        <!-- Modal Body -->
+                        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                        <div class="modal fade" id="modalId-{{ $apartment->id }}" tabindex="-1" data-bs-backdrop="static"
+                            data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitle-{{ $apartment->id }}"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
+                                role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTitle-{{ $apartment->id }}">Identificativo
+                                            appartamento 🏡: {{ $apartment->id }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Attenzione! Se procedi eliminando questo appartmaneto non potrai più tornare
+                                        indietro, confermi? 📛
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+
+                                        <!-- Delete form -->
+                                        <form action="{{ route('admin.apartments.destroy', $apartment->slug) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Confirm</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="description">
 
-                    <div class="maps mx_auto my-5 text-center">
+                    <!-- map -->
+                    <div class="maps_box mx_auto my-5 text-center">
 
-                        <!-- map -->
-                        <div id="map-{{ $apartment->id }}" style="width: 100%; height: 300px; margin: -3rem 0 0"></div>
+                        <div id="map-{{ $apartment->id }}" class="maps_width"></div>
 
                         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 
@@ -195,9 +240,9 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        
+
                         <div class="modal-body">
-                            
+
                             {{-- Carousel --}}
                             <div class="container w-100 my-5">
 
@@ -217,8 +262,8 @@
                                         <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
                                         <span class="visually-hidden">Previous</span>
                                     </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                                        data-bs-slide="next">
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="next">
                                         <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
                                         <span class="visually-hidden">Next</span>
                                     </button>
