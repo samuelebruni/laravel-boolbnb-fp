@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApartmentController;
 use App\Http\Controllers\API\ServiceController;
 use App\Models\Apartment;
+use App\Http\Controllers\API\LeadController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,3 +27,6 @@ Route::get('apartment/{id}', [ApartmentController::class, 'getApartmentById']);
 
 //Services
 Route::get('service', [ServiceController::class, 'index']);
+
+//Mail
+Route::post('/contacts', [LeadController::class, 'store']);
