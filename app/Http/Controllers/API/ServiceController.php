@@ -9,10 +9,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        return response()->json([
-            'status' => 'success',
-            'result' => Service::all()
-        ]);
+        $services = Service::all(); // Assuming Service is the model for your services
+        return response()->json(['result' => $services]);
     }
-
 }
