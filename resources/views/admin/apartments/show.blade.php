@@ -37,6 +37,10 @@
             margin: 0rem 1rem 0;
         }
 
+        /* .carousel {
+                width: 100%;
+                height: 500px
+            } */
         /* spacing */
 
         .mx_auto {
@@ -175,9 +179,39 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
                 </div>
+
             </div>
+
+            {{-- Carousel --}}
+            <div class="container d-block w-50 mx-auto my-5">
+
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($apartment->images as $key => $image)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                <img class="cover_image w-100"
+                                    src="{{ str_contains($image->path, 'http') ? $image->path : asset('storage/' . $image->path) }}"
+                                    alt="Immagine {{ $image->id }}">
+
+                            </div>
+                        @endforeach
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+
         </div>
     @endsection
