@@ -65,15 +65,15 @@
         </div> --}}
 
         <div class="maps mx_auto my-5 text-center">
-
+            <h6>{{$apartment->address}}</h6>
             <!-- map -->
             <div id="map-{{$apartment->id}}" style="width: 100%; height: 400px;"></div>
 
 
 
+            <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 
             <script>
-                src = "https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"
                 // Access the dynamic data from the server-side
                 let apartment = @json($apartment);
 

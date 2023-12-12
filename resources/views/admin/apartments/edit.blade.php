@@ -24,6 +24,7 @@
                 <div id="tomtom-searchbox-container"></div>
                 <input type="hidden" name="latitude" id="latitude">
                 <input type="hidden" name="longitude" id="longitude">
+                <input type="hidden" name="address" id="address">
                 <input type="hidden" name="municipality" id="municipality">
 
             </div>
@@ -38,24 +39,24 @@
 
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Change a main photo of the apartment</label>
-                    <input type="file" class="form-control" name="cover_image" id="cover_image" value="{{ old('cover_image') ? old('cover_image') : $apartment->cover_image }}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">              
+                    <input type="file" class="form-control" name="cover_image" id="cover_image" value="{{ old('cover_image') ? old('cover_image') : $apartment->cover_image }}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                 </div>
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Upload images for the apartments:</label>
-                    <input type="file" id="images" class="form-control" name="images[]" multiple>  
+                    <input type="file" id="images" class="form-control" name="images[]" multiple>
                 </div>
 
             </div>
 
             <div class="col-3 mb-5 me-5">
-                    <div>
-                        @if (str_contains($apartment->cover_image, 'http'))
-                        <img width="250" class=" img-fluid" src="{{ $apartment->cover_image }}">
-                        @else
-                        <img width="250" class=" img-fluid" src="{{asset('storage/' . $apartment->cover_image)}}" alt="">
-                        @endif
-                    </div>
+                <div>
+                    @if (str_contains($apartment->cover_image, 'http'))
+                    <img width="250" class=" img-fluid" src="{{ $apartment->cover_image }}">
+                    @else
+                    <img width="250" class=" img-fluid" src="{{asset('storage/' . $apartment->cover_image)}}" alt="">
+                    @endif
                 </div>
+            </div>
 
             <div class="mb-3">
 
@@ -162,6 +163,9 @@
 
             // Extract the municipality from the address and update the input field
             document.getElementById("municipality").value = address.municipality;
+
+            document.getElementById("address").value = address.freeformAddress;
+
         }
     });
 
