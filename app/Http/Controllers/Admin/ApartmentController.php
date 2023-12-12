@@ -64,7 +64,8 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        $images = Image::where('apartment_id', '=', $apartment->id)->get();
+        return view('admin.apartments.show', compact('apartment', 'images'));
     }
 
     /**

@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Apartment
-route::get('apartment', [ApartmentController::class, 'index']);
+Route::get('apartment', [ApartmentController::class, 'index']);
 Route::get('apartment/{id}', [ApartmentController::class, 'getApartmentById']);
 
 //Services

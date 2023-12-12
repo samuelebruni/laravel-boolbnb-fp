@@ -15,13 +15,13 @@ class ApartmentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'result' => Apartment::with('services')->get()
+            'result' => Apartment::with('services', 'images')->get()
         ]);
     }
 
     public function getApartmentById($id)
     {
-        $apartment = Apartment::with('services')->find($id);
+        $apartment = Apartment::with('services', 'images')->find($id);
         return response()->json([
             'success' => true,
             'result' => $apartment
