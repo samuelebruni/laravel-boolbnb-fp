@@ -13,7 +13,7 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
-        $services = ['Wi-Fi', 'Piscina', 'Sauna', 'Parcheggio Recintato', 'Parcheggio Privato', 'Cucina', 'Bagno Privato', 'Bagno in Comune', 'Asciugacapelli', 'Asciugatrice', 'Aria Condizionata', 'Ferro da Stiro', 'Camino', 'Griglia Barbecue', 'Palestra', 'Culla', 'Postazione Ricarica Veicoli Elettici', 'Idromassaggio', 'Allarme Antincendio', 'Rilevatore di Monossido di Carbonio', 'Lavatrice', 'TV', 'Doccia', 'Vasca'];
+        $services = ['Wi-Fi', 'Pool', 'Sauna', 'Fenced Parking', 'Private Parking', 'Kitchen', 'Private Bathroom', 'Shared Bathroom', 'Hair dryer', 'Tumble dryer', 'Air Conditioning', 'Iron', 'Fireplace', 'Barbecue', 'Gymnasium', 'Cradle', 'Electric Vehicle Charging Station', 'Whirlpool', 'Fire Alarm', 'Carbon Monoxide Detector', 'Washing machine', 'TV', 'Shower', 'Bathtub'];
 
         foreach ($services as $service){
             $newService = new Service();
