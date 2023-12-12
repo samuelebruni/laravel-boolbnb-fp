@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
+
 
 
 class Apartment extends Model
 {
     use HasFactory;
     /* use SoftDeletes; */
+
+    public function generateSlug($name)
+    {
+        return Str::slug($name, '-');
+    }
 
     public function services(): BelongsToMany
     {
@@ -35,5 +42,5 @@ class Apartment extends Model
         return $this->hasMany(Image::class);
     }
 
-    protected $fillable = ['name','cover_image','description','latitude','longitude','rooms', 'bedrooms', 'beds', 'bathrooms', 'smokers', 'visible', 'user_id', 'mq', 'max_guests', 'municipality'];
+    protected $fillable = ['name','cover_image','description','latitude','longitude','rooms', 'bedrooms', 'beds', 'bathrooms', 'smokers', 'visible', 'user_id', 'mq', 'max_guests', 'municipality', 'slug'];
 }

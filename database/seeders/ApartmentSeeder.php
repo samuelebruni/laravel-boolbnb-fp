@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Apartment;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+
 
 class ApartmentSeeder extends Seeder
 {
@@ -17,6 +19,7 @@ class ApartmentSeeder extends Seeder
         for ($i = 0; $i < 6; $i++){
             $apartment = new Apartment();
             $apartment->name = $faker->realText(50);
+            $apartment->slug = Str::slug($apartment->name, '-');
             $apartment->latitude = $faker->realText(50);
             $apartment->longitude = $faker->realText(50);
             $apartment->description = $faker->realText(200);

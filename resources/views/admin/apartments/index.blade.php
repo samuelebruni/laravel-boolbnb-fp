@@ -105,8 +105,8 @@
                     @endif
                     <hr>
                     <div class="d-flex justify-content-around">
-                        <a href="{{route('admin.apartments.show', $apartment->id)}}" class="btn pink">View</a>
-                        <a href="{{route('admin.apartments.edit', $apartment->id)}}" class="btn pink">Edit</a>
+                        <a href="{{route('admin.apartments.show', $apartment->slug)}}" class="btn pink">View</a>
+                        <a href="{{route('admin.apartments.edit', $apartment->slug)}}" class="btn pink">Edit</a>
                         <button type="button" class="btn pink" data-bs-toggle="modal" data-bs-target="#modalId-{{$apartment->id}}">
                             Delete
                         </button>
@@ -131,7 +131,7 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
                         <!-- Delete form -->
-                        <form action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
+                        <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Confirm</button>
