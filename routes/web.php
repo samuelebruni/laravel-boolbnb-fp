@@ -22,7 +22,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('apartments', ApartmentController::class);
+    Route::resource('apartments', ApartmentController::class)->parameters([
+        'apartments' => 'apartment:slug'
+    ]);;
 });
 
 Route::middleware('auth')->group(function () {

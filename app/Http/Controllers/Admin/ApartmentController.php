@@ -10,6 +10,8 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
+use Illuminate\Support\Str;
+
 
 class ApartmentController extends Controller
 {
@@ -38,6 +40,7 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         $validateData = $request->validated();
+        $validateData['slug'] = Str::slug($request->name, '-');
         if ($request->has('cover_image')) {
             $file_path = Storage::put('apartments_thumbs', $request->cover_image);
             $validateData['cover_image'] = $file_path;
@@ -83,6 +86,12 @@ class ApartmentController extends Controller
             $path = Storage::put('apartments_thumbs', $request->cover_image);
             $validateData['cover_image'] = $path;
         }
+
+        if (!Str::is($apartment->getOriginal('name'), $request->name)) {
+
+            $validateData['slug'] = $apartment->generateSlug($request->name);
+        }
+
         if ($request->has('services')) {
             $apartment->services()->sync($validateData['services']);
         }
