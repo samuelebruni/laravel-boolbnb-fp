@@ -23,6 +23,7 @@
                 <input type="hidden" name="latitude" id="latitude">
                 <input type="hidden" name="longitude" id="longitude">
                 <input type="hidden" name="municipality" id="municipality">
+                <input type="hidden" name="address" id="address">
 
 
             </div>
@@ -42,7 +43,7 @@
                 </div>
                 <div class="col-3 me-5">
                     <label for="" class="form-lable mb-2">Upload images for the apartments:</label>
-                    <input type="file" id="images" class="form-control" name="images[]" multiple>                
+                    <input type="file" id="images" class="form-control" name="images[]" multiple>
                 </div>
 
             </div>
@@ -151,6 +152,10 @@
 
             // Extract the municipality from the address and update the input field
             document.getElementById("municipality").value = address.municipality;
+
+
+
+            document.getElementById("address").value = address.freeformAddress;
         }
     });
 
