@@ -71,9 +71,9 @@
 
 
 
-            <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 
             <script>
+                src = "https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"
                 // Access the dynamic data from the server-side
                 let apartment = @json($apartment);
 
