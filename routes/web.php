@@ -20,6 +20,12 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/mailable', function(){
+    $lead = App\Models\Lead::find(1);
+
+    return new App\Mail\FromLeadEmail($lead);
+});
+
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class)->parameters([
