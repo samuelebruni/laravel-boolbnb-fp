@@ -48,14 +48,8 @@
         }
     </style>
 
-    <div class="mt-3 text-center">Show Apartment NAME 👉 <strong>{{ $apartment->name }} 🏡</strong></div>
-    <div class="d-flex gap-3 justify-content-end my-5">
-        <a href="{{ route('admin.apartments.edit', $apartment->id) }}" class="btn pink">Edit</a>
-            <button type="button" class="btn pink" data-bs-toggle="modal"
-                data-bs-target="#modalId-{{ $apartment->id }}">
-                Delete
-            </button>
-    </div>
+    <div class="mt-3">Show Apartment NAME 👉 <strong>{{ $apartment->name }} 🏡</strong></div>
+
     <div class="container details_info mt-3">
         <div class="row mx_auto g-4">
             <div class="col-sm-12 col-md-8 col-lg-12 d-flex">
@@ -68,43 +62,27 @@
 
                     <h2 class="card-title text-center my-5">{{ $apartment->name }}</h2>
 
-                    <div class="row mb-5">
-                        @forelse ($images as $image)
-                            <div class="col-6 g-2">
-                                <img class="img-fluid" src="{{ asset('storage/' . $image->path) }} "
-                                    alt="">
-                            </div>
-                        @empty
-                            <h4>Non sono presenti immagini</h4>
-                        @endforelse
+                    <div class="d-flex justify-content-around my-5">
+                        <a href="{{ route('admin.apartments.edit', $apartment->id) }}" class="btn pink">Edit</a>
+                        <button type="button" class="btn pink" data-bs-toggle="modal"
+                            data-bs-target="#modalId-{{ $apartment->id }}">
+                            Delete
+                        </button>
                     </div>
-                
                 </div>
-                
-            
-
 
                 <div class="description">
 
                     <div class="maps mx_auto my-5 text-center">
 
-
-        <div class="maps mx_auto my-5 text-center">
-            <h6>{{$apartment->address}}</h6>
-            <!-- map -->
-            <div id="map-{{$apartment->id}}" style="width: 100%; height: 400px;"></div>
-
-
+                        <!-- map -->
+                        <div id="map-{{ $apartment->id }}" style="width: 100%; height: 200px; margin: -3rem 0 0"></div>
 
                         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 
                         <script>
                             // Access the dynamic data from the server-side
                             let apartment = @json($apartment);
-
-
-
-
 
                             // Set product information
                             tt.setProductInfo("map", "1.0.0");
@@ -124,20 +102,11 @@
                             }).setLngLat([apartment.longitude, apartment.latitude]).addTo(map);
                         </script>
 
-
                         <!-- map -->
                     </div>
 
                     <h6 style="margin: -2rem 0 0">Description: </h6>
                     <p class="mb-2">{{ $apartment->description }}</p>
-
-                    {{-- <h6>{{ $apartment->services }}</h6> --}}
-
-                    {{-- <div id="map-{{$apartment->id}}" style="width: 304px; height: 300px;">
-            </div> --}}
-
-
-
 
                     <div class="card-body details_info mx_auto my-3">
                         <div class="d-flex justify-content-between">
@@ -148,7 +117,6 @@
                                     <img class="me-3"
                                         src="data:image/png;base64,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">
                                     Rooms: {{ $apartment->rooms }}
-
                                 </h6>
 
                                 <h6 class="d-flex align-items-center ">
@@ -206,17 +174,8 @@
 
                             </div>
 
-                            {{-- <div class="card-body d-flex flex-column justify-content-center align-items-start pb-0 pt-0 ms_5">
-    
-                        <h6 class="d-flex align-items-center ms-4">
-                            <img class="me-3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADsElEQVR4nO2XbWgcRRjHpyqiQgWx+EkFRcF+0IKiqAiJ3b2DihJDOKJgTVtK7GGFeuHyPJdcuxa0yT2z1xDFi3fz3Em1Cg34xRe0qBWr9pIqbZO0QgptQBSVolbw1NiXkdma9Jo059UP113ZH/xhd15gfvPCzgoREvL/IuXmbxNaLxJBBrdsuxYkn4BscZkIMkDFJ5H4J8dxLhNBBkhtNxFBB4gngQpPiyDjOPmrQPKpbjd//9y6FKk7kIo2Et+HfblrhJ/plYWbULKG/vyNc+uA1DemzquXfAqJP0aZv1v4ke5+dY8ZqFmZmqvmFh9AyW8gqZNA6gnhN3oypTs9kcHXr66nPZCKI/FfZgKEn0i4+SVGxAjV2wdJ7TDbTPgNIN6Lkvvqbd/dr5Z65yZbul34CZS8EiRXkpnSrfX2AVKHQHJS+AqtF4Hkd5DUEdxavLmeLkjsouSfgdTLvW7pBuEXns0OX4nEHwCpX1Cqjn+7QCYzvBilWo1SfWmEUhl+UPgFx3EuAVKIpH4DyfvNHcxxhi+v1Sc2PHwpEA+i5OPmmyT8RHd/4XqQKmsGh1J9D5Kfx6y6peYESN4NxG8KP5LM8GIgfgYkjyGp00jqUyBuMwOf2xaJoyDVtO+vMuiqu1DyK0jqd3PJRLfweHW9+QUwvwKYUe0iCHTJ3HVAvAWJ/wTiUvXqgFS7zDYUQQLNCpkVIE7MlhHnfXtOagFSdZltVvUukdS7ImhAtrgMpZqaeUfJ6wK5IjUZ6rE/K6SjIxeSoY0PjW/tbft1/aaXRhqZ5zZsHn+vpe34aDT6+Wg0unvP8uW5sm0v9URyPbbeWVipv9i+tu6Y9qbf2x+VG5odg6zLlqXHYzF9eM0aPdbaeqJsWSdHbPteT+TozqSu7HvhTMbk2ecFykx706/RHHr/Q09kIhbT3yUSeioe1/taWk6PRCKj54qMubpy5K05EvPLLrbIHwMDnowR+TGV0mXbnp6/IjOZfE1XDubml/tApGxZ+lg67YkcaG313hcWOUC6sr/vXDFT5gORY+m0nuzo8ES+TSTOI2IGfnCoSsbVlYkXzzyb8n/ELrbIVDw+m6OdnecRMTNuZn5GxEh8XfDd1pqoOuwT7e16NBL5YeGtVSN+OeyHV63Se1esmC5bVsYT+a/pTA00NJvWp2cP+2wikW2fNDVdIYZ6reYLjZt+9OHNuHbDUzDQ3Mj0xDc+8upjq7v2WJZdtqzmr5qaltS+t4SEhISEhISEhISIs/wNr96w/tlzwBIAAAAASUVORK5CYII=">
-                            Smokers: {{ $apartment->smokers }}
-                        </h6>
-    
-                    </div>
-                </div> --}}
                         </div>
-
+                        
                     </div>
                 </div>
             </div>
