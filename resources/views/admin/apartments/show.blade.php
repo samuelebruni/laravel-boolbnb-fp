@@ -36,11 +36,14 @@
         .description {
             margin: 0rem 1rem 0;
         }
-
-        /* .carousel {
-                width: 100%;
-                height: 500px
-            } */
+        .show_images{
+            text-decoration-line: underline;
+            color: #ff385c;
+            cursor: pointer;
+        }
+        .modal-dialog {
+            max-width: 800px;
+        }
         /* spacing */
 
         .mx_auto {
@@ -60,9 +63,10 @@
 
                 <div class="title_image">
 
-                    <img class="cover_image"
+                    <img class="cover_image" 
                         src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}"
                         class="card-img-top" alt="Apartment Image">
+                        <p class="show_images" data-bs-toggle="modal" data-bs-target="#exampleModal">Show others images</p>
 
                     <h2 class="card-title text-center my-5">{{ $apartment->name }}</h2>
 
@@ -80,7 +84,7 @@
                     <div class="maps mx_auto my-5 text-center">
 
                         <!-- map -->
-                        <div id="map-{{ $apartment->id }}" style="width: 100%; height: 200px; margin: -3rem 0 0"></div>
+                        <div id="map-{{ $apartment->id }}" style="width: 100%; height: 300px; margin: -3rem 0 0"></div>
 
                         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 
@@ -185,33 +189,47 @@
 
             </div>
 
-            {{-- Carousel --}}
-            <div class="container d-block w-50 mx-auto my-5">
 
-                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        @foreach ($apartment->images as $key => $image)
-                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img class="cover_image w-100"
-                                    src="{{ str_contains($image->path, 'http') ? $image->path : asset('storage/' . $image->path) }}"
-                                    alt="Immagine {{ $image->id }}">
 
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        
+                        <div class="modal-body">
+                            
+                            {{-- Carousel --}}
+                            <div class="container w-100 my-5">
+
+                                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        @foreach ($apartment->images as $key => $image)
+                                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                                <img class="cover_image d-block w-100"
+                                                    src="{{ str_contains($image->path, 'http') ? $image->path : asset('storage/' . $image->path) }}"
+                                                    alt="Immagine {{ $image->id }}">
+
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                        data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                        data-bs-slide="next">
+                                        <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
                             </div>
-                        @endforeach
+
+
+                        </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+
                 </div>
             </div>
-
-
         </div>
     @endsection
