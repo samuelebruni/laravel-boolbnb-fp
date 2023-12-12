@@ -75,8 +75,11 @@
 
                     <div class="maps mx_auto my-5 text-center">
 
-                        <!-- map -->
-                        <div id="map-{{ $apartment->id }}" style="width: 100%; height: 200px; margin: -3rem 0 0"></div>
+
+        <div class="maps mx_auto my-5 text-center">
+            <h6>{{$apartment->address}}</h6>
+            <!-- map -->
+            <div id="map-{{$apartment->id}}" style="width: 100%; height: 400px;"></div>
 
 
 
