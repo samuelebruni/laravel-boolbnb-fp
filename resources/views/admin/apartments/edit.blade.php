@@ -140,12 +140,12 @@
     var options = {
         searchOptions: {
             key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
-            language: "it-IT",
+            language: "en-US",
             limit: 5,
         },
         autocompleteOptions: {
             key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
-            language: "it-IT",
+            language: "en-US",
         },
     };
 
