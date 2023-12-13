@@ -47,10 +47,10 @@
             max-width: 800px;
         }
         .maps_box{
-            width: 600px;
+            width: 700px;
         }
         .maps_width{
-            width: 600px;
+            width: 700px;
             height: 350px;
             margin: -3rem 0 0;
         }
