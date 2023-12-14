@@ -8,18 +8,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Laravel\Cashier\Billable;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use Billable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name','surname','date_of_birth','email','password'];
+    protected $fillable = ['name', 'surname', 'date_of_birth', 'email', 'password'];
     /**
      * The attributes that should be hidden for serialization.
      *

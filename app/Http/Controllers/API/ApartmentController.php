@@ -13,7 +13,7 @@ class ApartmentController extends Controller
      */
     public function index(Request $request)
     {
-        $q = Apartment::with('services', 'images');
+        $q = Apartment::with('services', 'images', 'sponsorships')->where('visible', '=', 1);
         if ($request) {
             if ($request->selected_services) {
                 $services = $request->selected_services;
@@ -70,7 +70,7 @@ class ApartmentController extends Controller
         $apartments = $q->get();
         return response()->json([
             'success' => true,
-            'result' => Apartment::with('services', 'images', 'sponsorships')->where('visible', '=', 1)->get()
+            'result' => $apartments
         ]);
     }
 
