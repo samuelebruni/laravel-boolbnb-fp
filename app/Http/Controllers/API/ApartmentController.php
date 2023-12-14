@@ -15,7 +15,7 @@ class ApartmentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'result' => Apartment::with('services', 'images')->get()
+            'result' => Apartment::with('services', 'images', 'sponsorships')->where('visible', '=', 1)->get()
         ]);
     }
 
