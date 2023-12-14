@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreign('sponsorship_id')
                 ->references('id')
                 ->on('sponsorships');
+            $table->dateTime('start_sponsorship');
+            $table->dateTime('expired_sponsorship');
             $table->timestamps();
         });
     }

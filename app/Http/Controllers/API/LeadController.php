@@ -14,10 +14,10 @@ class LeadController extends Controller
     function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:50',
+            'name' => 'required|min:3|max:50',
             'email' => 'required|email',
             'phone' => 'required',
-            'message' => 'required',
+            'message' => 'required|min:3',
         ]);
 
         if ($validator->fails()) {
@@ -36,7 +36,7 @@ class LeadController extends Controller
                 'success' => true,
                 'message' => 'Il messaggio è stato inviato correttamente 👍'
             ]
-            );
+        );
     }
 }
 

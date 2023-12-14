@@ -70,7 +70,7 @@ class ApartmentController extends Controller
         $apartments = $q->get();
         return response()->json([
             'success' => true,
-            'result' => $apartments
+            'result' => Apartment::with('services', 'images', 'sponsorships')->where('visible', '=', 1)->get()
         ]);
     }
 

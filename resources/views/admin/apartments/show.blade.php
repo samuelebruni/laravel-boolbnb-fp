@@ -65,8 +65,20 @@
             margin: 0 0 0 5rem;
         }
     </style>
+    <div class="my-1">
+        @if(session('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>{{session('message')}}</strong>
+        </div>
+        @endif
+    </div>
 
     <div class="mt-3">Show Apartment NAME 👉 <strong>{{ $apartment->name }} 🏡</strong></div>
+    <div>
+        <a href="{{ route('admin.sponsorships.index', $apartment) }}" class="btn btn-dark">Sponsorizza il tuo
+            appartamento</a>
+    </div>
 
     <div class="container details_info mt-3">
         <div class="row mx_auto g-4">
