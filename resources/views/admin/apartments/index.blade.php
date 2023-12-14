@@ -24,6 +24,10 @@
         border: 1px solid #ff385c;
         transform: scale(1.05);
     }
+    .coverimage{
+        width: 100%;
+        height: 200px;
+    }
 </style>
 
 <section class="container my-5">
@@ -56,7 +60,7 @@
         <div class="col">
             <div class="card">
                 <a href="{{route('admin.apartments.show', $apartment->slug)}}">
-                    <img src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
+                    <img class="coverimage" src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
                 </a>
 
 
