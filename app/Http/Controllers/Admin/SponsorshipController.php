@@ -24,6 +24,17 @@ class SponsorshipController extends Controller
         return view('admin.sponsorships.index', compact('apartment', 'sponsorships'));
     }
 
+    public function show(Apartment $apartment)
+    {
+        $user_id = Auth::user()->id;
+        if ($user_id !== $apartment->user_id) {
+            return redirect()->route('admin.apartments.index');
+        }
+
+        $sponsorships = Sponsorship::all();
+        return view('admin.sponsorships.index', compact('apartment', 'sponsorships'));
+    }
+
     public function transation(Request $request, $id){
         $data = $request->all();
         $apartment = Apartment::find($id);

@@ -19,4 +19,10 @@ class LeadController extends Controller
 
         return view('admin.leads.index', compact('leads', 'apartments', 'user'));
     }
+
+    public function destroy(Lead $lead)
+    {
+        $lead->delete();
+        return to_route('admin.leads.index');
+    }
 }

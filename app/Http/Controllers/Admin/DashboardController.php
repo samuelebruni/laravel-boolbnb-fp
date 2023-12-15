@@ -14,7 +14,10 @@ class DashboardController extends Controller
     {
     
         $allApartments = Apartment::where('user_id', Auth::id())->count();
-        $allLeads = Lead::all()->count();
+        $allLeads = Lead::whereHas('apartment', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->count();
+        
     
         return view('admin.index', compact('allApartments', 'allLeads'));
     }

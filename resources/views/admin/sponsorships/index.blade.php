@@ -211,10 +211,6 @@
         border: 1px solid #dfc76c;
         transform: scale(1.05);
     }
-    
-    
-
-
 </style>
 
 @endsection
