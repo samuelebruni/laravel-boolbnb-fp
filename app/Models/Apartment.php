@@ -42,5 +42,10 @@ class Apartment extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
     protected $fillable = ['name','cover_image','description','latitude','longitude','rooms', 'bedrooms', 'beds', 'bathrooms', 'smokers', 'visible', 'user_id', 'mq', 'max_guests', 'municipality', 'slug', 'address'];
 }
