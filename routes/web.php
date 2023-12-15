@@ -12,7 +12,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/mailable', function(){
+Route::get('/mailable', function () {
     $lead = App\Models\Lead::find(1);
 
     return new App\Mail\FromLeadEmail($lead);
@@ -27,11 +27,13 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::post('/apartments/{apartment}/sponsorship/transation', [SponsorshipController::class, 'transation'])->name('sponsorship.transation');
 });
 
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
 });
+
 
 require __DIR__ . '/auth.php';
