@@ -130,6 +130,11 @@
             key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
             language: "en-US",
             limit: 5,
+            placeholder: "ao",
+
+        },
+        labels: {
+            placeholder: "Search for a location"
         },
         autocompleteOptions: {
             key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",

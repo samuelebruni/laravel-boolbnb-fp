@@ -22,10 +22,10 @@
             <div class="mb-3">
                 <label for="location" class="form-label">Location</label>
                 <div id="tomtom-searchbox-container"></div>
-                <input type="hidden" name="latitude" id="latitude">
-                <input type="hidden" name="longitude" id="longitude">
-                <input type="hidden" name="address" id="address">
-                <input type="hidden" name="municipality" id="municipality">
+                <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude') ? old('latitude') : $apartment->latitude }}">
+                <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') ? old('longitude') : $apartment->longitude }}">
+                <input type="hidden" name="address" id="address" value="{{ old('address') ? old('address') : $apartment->address }}">
+                <input type="hidden" name="municipality" id="municipality" value="{{ old('municipality') ? old('municipality') : $apartment->municipality }}">
 
             </div>
             <div class="mb-3">
@@ -142,12 +142,18 @@
             key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
             language: "en-US",
             limit: 5,
+
+        },
+        labels: {
+            placeholder: " Old location: {{ $apartment->municipality }}"
         },
         autocompleteOptions: {
             key: "C1hD0sgXZDUkeMEZv5sG1rcdkSZbr1dX",
             language: "en-US",
+
         },
     };
+
 
     var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
 
@@ -155,23 +161,15 @@
         if (event.data && event.data.result && event.data.result.address) {
             var address = event.data.result.address;
 
-            // Log the selected result data to the console
-
-            // Update the hidden latitude and longitude input fields in the form
             document.getElementById("latitude").value = event.data.result.position.lat;
             document.getElementById("longitude").value = event.data.result.position.lng;
-
-            // Extract the municipality from the address and update the input field
             document.getElementById("municipality").value = address.municipality;
-
             document.getElementById("address").value = address.freeformAddress;
-
         }
     });
 
-    // Append the SearchBox to the designated container
     var searchBoxContainer = document.getElementById("tomtom-searchbox-container");
     searchBoxContainer.appendChild(ttSearchBox.getSearchBoxHTML());
 </script>
-</script>
+
 @endsection
