@@ -76,7 +76,7 @@ class ApartmentController extends Controller
 
     public function getApartmentById($id)
     {
-        $apartment = Apartment::with('services', 'images')->find($id);
+        $apartment = Apartment::with('services', 'images', 'sponsorships')->find($id);
         return response()->json([
             'success' => true,
             'result' => $apartment
