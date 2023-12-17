@@ -29,11 +29,11 @@
 <section class="container my-5">
     <div class="d-flex justify-content-between mb-3">
         <h4 class="text-muted text-uppercase">All Apartments</h4>
-        <div>
 
-            <a href="{{route('admin.apartments.create')}}" class="btn money me-3">Boost Your Apartment </a>
-            <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
-        </div>
+
+
+        <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
+
 
     </div>
 
