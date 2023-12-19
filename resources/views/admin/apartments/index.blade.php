@@ -29,14 +29,19 @@
         width: 100%;
         height: 200px;
     }
+    .h_80{
+        height: 80px;
+    }
 </style>
 
 <section class="container my-5">
     <div class="d-flex justify-content-between mb-3">
         <h4 class="text-muted text-uppercase">All Apartments</h4>
 
+features/responsive-site
+            <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
+        </div>
 
-        <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
 
     </div>
 
@@ -56,7 +61,7 @@
 
 
         @forelse ($apartments as $apartment)
-        <div class="col">
+        <div class="col-sm-12 col-md-10 col-lg-4 col-xl-3">
             <div class="card">
                 <a href="{{route('admin.apartments.show', $apartment->slug)}}">
                     <img class="coverimage" src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
@@ -66,7 +71,7 @@
 
 
                 <div class="card-body">
-                    <h5 class="card-title">{{$apartment->name}}</h5>
+                    <h5 class="card-title h_80">{{$apartment->name}}</h5>
                     @if($apartment->visible)
                     <p class="text-success mt-3">Apartment is active</p>
                     @else

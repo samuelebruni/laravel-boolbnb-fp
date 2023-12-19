@@ -7,9 +7,24 @@
             color: white;
         }
 
+        .t_pink {
+            color: #ff385c;
+        }
+
         .pink:hover {
             color: #ff385c;
             border: 1px solid #ff385c;
+            transform: scale(1.05);
+        }
+
+        .green {
+            background-color: #7fcc32;
+            color: white;
+        }
+
+        .green:hover {
+            color: #7fcc32;
+            border: 1px solid #7fcc32;
             transform: scale(1.05);
         }
 
@@ -46,10 +61,12 @@
         .modal-dialog {
             max-width: 800px;
         }
-        .maps_box{
+
+        .maps_box {
             width: 700px;
         }
-        .maps_width{
+
+        .maps_width {
             width: 700px;
             height: 350px;
             margin: -3rem 0 0;
@@ -66,19 +83,15 @@
         }
     </style>
     <div class="my-1">
-        @if(session('message'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <strong>{{session('message')}}</strong>
-        </div>
+        @if (session('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>{{ session('message') }}</strong>
+            </div>
         @endif
     </div>
 
-    <div class="mt-3">Show Apartment NAME 👉 <strong>{{ $apartment->name }} 🏡</strong></div>
-    <div>
-        <a href="{{ route('admin.sponsorships.index', $apartment) }}" class="btn btn-dark">Sponsorizza il tuo
-            appartamento</a>
-    </div>
+    <div class="mt-3">Show Apartment NAME 👉 <strong class="t_pink">{{ $apartment->name }} 🏡</strong></div>
 
     <div class="container details_info mt-3">
         <div class="row mx_auto g-4">
@@ -86,16 +99,21 @@
 
                 <div class="title_image">
 
-                    <img class="cover_image"
+                    <img class="cover_image rounded-3"
                         src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}"
                         class="card-img-top" alt="Apartment Image">
-                    <p class="show_images" data-bs-toggle="modal" data-bs-target="#exampleModal">Show others images</p>
+                    <p class="show_images my-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                            class="fa-solid fa-camera me-2"></i>Show others images</p>
 
                     <h2 class="card-title text-center my-5">{{ $apartment->name }}</h2>
 
                     <div class="d-flex justify-content-around my-5">
-                        <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn pink">Edit</a>
-                        <button type="button" class="btn pink" data-bs-toggle="modal"
+                        <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn pink px-4">Modificy</a>
+                        <div>
+                            <a href="{{ route('admin.sponsorships.index', $apartment) }}"
+                                class="btn btn-success green px-4">Boost visible</a>
+                        </div>
+                        <button type="button" class="btn pink px-4" data-bs-toggle="modal"
                             data-bs-target="#modalId-{{ $apartment->id }}">
                             Delete
                         </button>
@@ -141,7 +159,7 @@
                     <!-- map -->
                     <div class="maps_box mx_auto my-5 text-center">
 
-                        <div id="map-{{ $apartment->id }}" class="maps_width"></div>
+                        <div id="map-{{ $apartment->id }}" class="maps_width rounded-3"></div>
 
                         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
 
@@ -262,15 +280,15 @@
                                     <div class="carousel-inner">
                                         @foreach ($apartment->images as $key => $image)
                                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                                <img class="cover_image d-block w-100"
+                                                <img class="cover_image d-block w-100 rounded-3"
                                                     src="{{ str_contains($image->path, 'http') ? $image->path : asset('storage/' . $image->path) }}"
                                                     alt="Immagine {{ $image->id }}">
 
                                             </div>
                                         @endforeach
                                     </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                                        data-bs-slide="prev">
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span>
                                         <span class="visually-hidden">Previous</span>
                                     </button>
