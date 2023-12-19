@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\TransationController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/apartments/{apartment}/sponsorships/{sponsorship}/payment', [PaymentController::class, 'index'])->name('sponsorships.payment.index');
     Route::post('/apartments/{apartment}/sponsorships/{sponsorship}/payment/process', [PaymentController::class, 'process'])->name('sponsorships.payment.process');
     Route::resource('leads', LeadController::class);
+    Route::resource('transations', TransationController::class);
 });
 
 
