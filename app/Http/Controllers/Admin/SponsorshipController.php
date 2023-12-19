@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 
 class SponsorshipController extends Controller
 {
@@ -15,60 +15,56 @@ class SponsorshipController extends Controller
     {
         $user_id = Auth::user()->id;
         if ($user_id !== $apartment->user_id) {
-            return redirect()->route('admin.apartments.index');
+            return redirect()->route('admin.apartments.index')->with('message', 'You do not have permission to proceed 📛');
         }
-
-        
-
         $sponsorships = Sponsorship::all();
         return view('admin.sponsorships.index', compact('apartment', 'sponsorships'));
     }
 
-    public function show(Apartment $apartment)
+    public function store(Apartment $apartment, Sponsorship $sponsorship)
     {
-        $user_id = Auth::user()->id;
-        if ($user_id !== $apartment->user_id) {
-            return redirect()->route('admin.apartments.index');
-        }
+        //Controllo se l'utente autenticato è il proprietario dell'appartamento
+        if ($apartment->user_id === Auth::id()) {
 
-        $sponsorships = Sponsorship::all();
-        return view('admin.sponsorships.index', compact('apartment', 'sponsorships'));
-    }
+            // Verifica se l'appartamento ha già una sponsorizzazione in corso
+            $existingSponsorship = $apartment->sponsorships()
+                ->where('expired_sponsorship', '>', now())
+                ->first();
 
-    public function transation(Request $request, $id){
-        $data = $request->all();
-        $apartment = Apartment::find($id);
-
-        $now = date_create();
-        $start_date = date_create();
-
-        if(isset($data['sponsorship_id'])) {
-            if ($data['sponsorship_id'] == 1) {
-                date_add($now, date_interval_create_from_date_string("24 hours"));
-                $expiration = date_format($now, 'Y-m-d H:i:s');
-            } elseif ($data['sponsorship_id'] == 2) {
-                date_add($now, date_interval_create_from_date_string("72 hours"));
-                $expiration = date_format($now, 'Y-m-d H:i:s');
-            } else {
-                date_add($now, date_interval_create_from_date_string("144 hours"));
-                $expiration = date_format($now, 'Y-m-d H:i:s');
+            if ($existingSponsorship) {
+                // Appartamento ha già una sponsorizzazione attiva
+                return redirect()->route('admin.apartments.index')->with('message', 'Apartment already has an active sponsorship 📛');
             }
-    
-            if ($apartment->sponsorships()->exists(['apartment_id' => $apartment->id])) {
-                abort('403', 'Promozione già attiva su questo appartamento');
-            } else {
-    
-                $formatStartDate = date_format($start_date, 'Y-m-d H:i:s');
-                $apartment->sponsorships()->attach($data['sponsorship_id'], ['start_sponsorship' => $formatStartDate, 'expired_sponsorship' => $expiration]);
+
+            //Creazione di un oggetto Carbon rappresentante l'istante attuale
+            $expired_sponsorship = Carbon::now();
+
+            //Elaborazione della Durata della sponsorizzazione
+            $time = explode(':', $sponsorship->duration);
+            //Estrazione di ore,minuti e secondi dalla durata
+            $hours = (int)$time[0];
+            $minutes = (int)$time[1];
+            $seconds = (int)$time[2];
+
+            //Aggiunta della Durata alla data di scadenza
+            if ($hours) {
+                $expired_sponsorship->addHours($hours);
             }
-    
-    
-            $apartment->save();
-    
-            return to_route('admin.apartments.show', $apartment)->with('message', 'Successful Sponsorship ✅');
+            if ($minutes) {
+                $expired_sponsorship->addMinutes($minutes);
+            }
+            if ($seconds) {
+                $expired_sponsorship->addSeconds($seconds);
+            }
+
+            $apartment->sponsorships()->attach([
+                $sponsorship->id => ['expired_sponsorship' => $expired_sponsorship, 
+                'start_sponsorship' => now()]
+            ]);
+            return to_route('admin.apartments.index')->with('message', 'The sponsorship went well🚀');
         } else {
-            // Se la chiave 'sponsorship_id' non è presente, gestisci l'errore o ritorna una risposta appropriata.
-            abort(400, 'Chiave "sponsorship_id" mancante nell\'array $data');
+            //Errore 403 se l'utente non è il proprietario dell'appartamento
+            abort('403', 'You do not have permission to proceed 📛');
         }
     }
 }

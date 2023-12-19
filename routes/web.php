@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\Admin\LeadController;
-
+use App\Http\Controllers\Admin\PaymentController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -23,8 +23,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('apartments', ApartmentController::class)->parameters([
         'apartments' => 'apartment:slug'
     ]);
-    Route::get('/apartments/{apartment}/sponsorship', [SponsorshipController::class, 'index'])->name('sponsorships.index');
-    Route::post('/apartments/{apartment}/sponsorship/transation', [SponsorshipController::class, 'transation'])->name('sponsorship.transation');
+    Route::get('/apartments/{apartment}/sponsorships', [SponsorshipController::class, 'index'])->name('sponsorships.index');
+    Route::get('/apartments/{apartment}/sponsorships/{sponsorship}', [SponsorshipController::class, 'store'])->name('sponsorships.store');
+    Route::get('/apartments/{apartment}/sponsorships/{sponsorship}/payment', [PaymentController::class, 'index'])->name('sponsorships.payment.index');
+    Route::post('/apartments/{apartment}/sponsorships/{sponsorship}/payment/process', [PaymentController::class, 'process'])->name('sponsorships.payment.process');
     Route::resource('leads', LeadController::class);
 });
 
