@@ -64,5 +64,8 @@
         background: #ff385c !important;
         border: 1px solid #ff385c !important;
     }
+    .card{
+        border: 1px solid #ff385c !important;
+    }
 </style>
 @endsection
