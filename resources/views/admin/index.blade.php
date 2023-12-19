@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-sm mt-3 col-lg-4">
             <div class="card text-center">
-                <div class="card-header bg-white">Strutture Attive</div>
+                <div class="card-header bg-white">Apartments</div>
 
                 <div class="card-body">
                     <h1>
@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm mt-3 col-lg-4">
             <div class="card text-center">
-                <div class="card-header bg-white">Messaggi</div>
+                <div class="card-header bg-white">Messages</div>
 
                 <div class="card-body ">
 
@@ -41,13 +41,13 @@
         </div>
         <div class="col-sm mt-3 col-lg-4">
             <div class="card text-center">
-                <div class="card-header bg-white">Pagamenti</div>
+                <div class="card-header bg-white">Transations</div>
 
                 <div class="card-body">
 
 
                     <h1>
-                        N/A
+                        {{$allTransations}}
                     </h1>
                 </div>
             </div>

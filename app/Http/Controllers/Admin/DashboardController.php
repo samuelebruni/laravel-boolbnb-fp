@@ -12,13 +12,19 @@ class DashboardController extends Controller
 {
     public function index()
     {
-    
+        // Conta tutti gli appartamenti dell'utente autenticato
         $allApartments = Apartment::where('user_id', Auth::id())->count();
+
+        // Conta tutti i lead associati agli appartamenti dell'utente autenticato
         $allLeads = Lead::whereHas('apartment', function ($query) {
             $query->where('user_id', Auth::id());
         })->count();
-        
-    
-        return view('admin.index', compact('allApartments', 'allLeads'));
+
+        // Conta tutte le transazioni (appartamenti con sponsorizzazioni) dell'utente autenticato
+        $allTransations = Apartment::whereHas('sponsorships', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->count();
+
+        return view('admin.index', compact('allApartments', 'allLeads', 'allTransations'));
     }
 }

@@ -34,7 +34,7 @@ class Apartment extends Model
 
     public function sponsorships(): BelongsToMany
     {
-        return $this->belongsToMany(Sponsorship::class);
+        return $this->belongsToMany(Sponsorship::class)->withPivot('expired_sponsorship', 'start_sponsorship');
     }
 
     public function images(): HasMany
