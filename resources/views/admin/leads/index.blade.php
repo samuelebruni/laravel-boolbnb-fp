@@ -2,8 +2,16 @@
 
 @section('content')
     
+<style>
+    .pink, thead>tr>th, table{
+        color: #ffffff !important;
+        background: #ff385c !important;
+        border: 1px solid #ff385c !important;
+    }
+</style>
+
 <div class="container">
-    <h2 class="mt-3 mb-5">My Messages</h2>
+    <h2 class="fs-4 text-secondary pt-4 my-4">My Messages</h2>
 
     <table class="table table-striped">
         <thead>
@@ -23,7 +31,7 @@
                         <tr>
                             <td>{{$apartment->name}}</td>
                             <td>{{$message->phone}}</td>
-                            <td>{{$message->message}}</td>
+                            <td class="w_100">{{$message->message}}</td>
                             <td>{{$message->email}}</td>
                             <td>{{$message->created_at}}</td>
                             <td>

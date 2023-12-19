@@ -56,9 +56,13 @@
 </div>
 
 <style>
-    .card-body {
+/*     .card-body {
         color: #ff385c;
-
+    } */
+    .card-header{
+        color: #ffffff !important;
+        background: #ff385c !important;
+        border: 1px solid #ff385c !important;
     }
 </style>
 @endsection
