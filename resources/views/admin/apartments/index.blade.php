@@ -24,7 +24,8 @@
         border: 1px solid #ff385c;
         transform: scale(1.05);
     }
-    .coverimage{
+
+    .coverimage {
         width: 100%;
         height: 200px;
     }
@@ -36,10 +37,11 @@
 <section class="container my-5">
     <div class="d-flex justify-content-between mb-3">
         <h4 class="text-muted text-uppercase">All Apartments</h4>
-        <div>
 
+features/responsive-site
             <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
         </div>
+
 
     </div>
 
