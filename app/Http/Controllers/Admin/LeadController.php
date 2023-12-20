@@ -10,11 +10,15 @@ use App\Models\Lead;
 
 class LeadController extends Controller
 {
-    public function index(Lead $lead) {
-
+    public function index(Lead $lead)
+    {
+        // Ottieni l'utente autenticato
         $user = Auth::user();
+
+        // Ottieni tutti gli appartamenti dell'utente autenticato
         $apartments = Apartment::where('user_id', '=', $user->id)->get();
 
+        // Ottieni tutti i messaggi
         $leads = Lead::all();
 
         return view('admin.leads.index', compact('leads', 'apartments', 'user'));
@@ -22,7 +26,10 @@ class LeadController extends Controller
 
     public function destroy(Lead $lead)
     {
+        // Elimina il messaggio
         $lead->delete();
-        return to_route('admin.leads.index');
+
+        return redirect()->route('admin.leads.index');
     }
 }
+

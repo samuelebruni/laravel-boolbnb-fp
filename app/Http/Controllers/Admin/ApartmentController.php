@@ -12,140 +12,136 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
 use Illuminate\Support\Str;
 
-
 class ApartmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        // Ottieni gli appartamenti dell'utente autenticato
         $apartments = Apartment::where('user_id', Auth::id())->get();
 
+        // Passa i dati alla vista
         return view('admin.apartments.index', compact('apartments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
+        // Ottieni tutti i servizi
         $services = Service::all();
+
+        // Mostra il form di creazione con i servizi disponibili
         return view('admin.apartments.create', compact('services'))->with('message', 'Creation was successful 💚🎉');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreApartmentRequest $request)
     {
-        $validateData = $request->validated();
-        $validateData['slug'] = Str::slug($request->name, '-');
+        // Validazione dei dati
+        $validatedData = $request->validated();
+
+        // Genera uno slug dall'input del nome
+        $validatedData['slug'] = Str::slug($request->name, '-');
+
+        // Gestione dell'immagine di copertina
         if ($request->has('cover_image')) {
             $file_path = Storage::put('apartments_thumbs', $request->cover_image);
-            $validateData['cover_image'] = $file_path;
+            $validatedData['cover_image'] = $file_path;
         }
-        
-        $validateData['user_id'] = Auth::id();
-        $apartment = Apartment::create($validateData);
+
+        // Aggiungi l'ID dell'utente autenticato
+        $validatedData['user_id'] = Auth::id();
+
+        // Creazione dell'appartamento
+        $apartment = Apartment::create($validatedData);
+
+        // Aggiungi le immagini associate all'appartamento
         if ($images = $request->images) {
             foreach ($images as $image) {
                 $path = Storage::put('apartments_thumbs', $image);
                 Image::create(['apartment_id' => $apartment->id,'path' => $path,]);
             }
         }
+
+        // Aggiungi i servizi associati all'appartamento
         $apartment->services()->attach($request->services);
 
-        return to_route('admin.apartments.index', $apartment);
+        return redirect()->route('admin.apartments.index', $apartment);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Apartment $apartment)
     {
         return view('admin.apartments.show', compact('apartment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Apartment $apartment)
     {
+        // Ottieni tutti i servizi
         $services = Service::all();
+
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $validateData = $request->validated();
+        // Validazione dei dati
+        $validatedData = $request->validated();
+
+        // Gestione dell'immagine di copertina
         if ($request->has('cover_image')) {
             $path = Storage::put('apartments_thumbs', $request->cover_image);
-            $validateData['cover_image'] = $path;
+            $validatedData['cover_image'] = $path;
         }
 
+        // Genera uno slug se il nome è stato modificato
         if (!Str::is($apartment->getOriginal('name'), $request->name)) {
-
-            $validateData['slug'] = $apartment->generateSlug($request->name);
+            $validatedData['slug'] = $apartment->generateSlug($request->name);
         }
 
+        // Aggiorna i servizi associati all'appartamento
         if ($request->has('services')) {
-            $apartment->services()->sync($validateData['services']);
+            $apartment->services()->sync($validatedData['services']);
         }
 
+        // Aggiungi le immagini associate all'appartamento
         if ($images = $request->images) {
             foreach ($images as $image) {
-                //dd($apartment->id);
                 $multiplePath = Storage::put('apartments_thumbs', $image);
                 Image::create(['apartment_id' => $apartment->id, 'path' => $multiplePath]);
-                //dd('created!');
             }
         }
 
-        $apartment->update($validateData);
+        // Aggiorna l'appartamento con i dati validati
+        $apartment->update($validatedData);
 
-
-        return to_route('admin.apartments.index')->with('message', 'Successful editing 🛠');
+        return redirect()->route('admin.apartments.index')->with('message', 'Successful editing 🛠');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Apartment $apartment)
     {
+        // Verifica se l'appartamento appartiene all'utente autenticato
         if ($apartment->user_id === Auth::id()) {
+            // Elimina l'immagine di copertina se presente
             if (!is_null($apartment->cover_image)) {
                 Storage::delete($apartment->cover_image);
             }
+
+            // Elimina tutte le immagini associate all'appartamento
             foreach ($apartment->images as $image) {
                 Storage::delete($image->path);
             }
-    
+
+            // Rimuovi i servizi associati all'appartamento
             $apartment->services()->detach();
 
+            // Elimina tutte le immagini associate all'appartamento
             $apartment->images()->delete();
-    
+
+            // Elimina l'appartamento
             $apartment->delete();
-            
-            return to_route('admin.apartments.index')->with('message', 'Successful deletion 💥');
+
+            // Reindirizza alla vista degli appartamenti con un messaggio di successo
+            return redirect()->route('admin.apartments.index')->with('message', 'Successful deletion 💥');
         }
+
+        // Se l'appartamento non appartiene all'utente autenticato, restituisci un errore 403
         abort(403, "You cannot delete this apartment 📛 it's not yours");
     }
-
-    /* public function recycle() {
-        $trashed = Apartment::onlyTrashed()->orderByDesc('id')->paginate(6);
-        return to_route('admin.apartments.trashed');
-    } */
-
-    /* public function restore($id) {
-        $apartment = Apartment::onlyTrashed()->find($id);
-
-        if($apartment) {
-            $apartment->restore();
-            return redirect()->route('apartment.recycle')->with('recycle_mess', 'The project was restored ♻');
-        }
-    } */
 }

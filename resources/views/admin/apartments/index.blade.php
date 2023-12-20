@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <style>
     .pink {
         background-color: #ff385c;
@@ -30,12 +31,15 @@
     }
 </style>
 
+
 <section class="container my-5">
     <div class="d-flex flex-sm-wrap justify-content-between mb-3">
         <h4 class="text-muted text-uppercase">All Apartments</h4>
+
         <div>
             <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
         </div>
+
 
     </div>
 
@@ -49,20 +53,12 @@
     </div>
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
-
-
-
-
-
         @forelse ($apartments as $apartment)
         <div class="col-sm-12 col-md-8 col-lg-12 d-flex">
             <div class="card">
                 <a href="{{route('admin.apartments.show', $apartment->slug)}}">
                     <img class="coverimage" src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
                 </a>
-
-
-
 
                 <div class="card-body">
                     <h5 class="card-title">{{$apartment->name}}</h5>
@@ -84,7 +80,6 @@
         </div>
 
         <!-- Modal Body -->
-        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
         <div class="modal fade" id="modalId-{{$apartment->id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitle-{{$apartment->id}}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
@@ -93,7 +88,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Attenzione! Se procedi eliminando questo appartmaneto non potrai più tornare indietro, confermi? 📛
+                        Attenzione! Se procedi eliminando questo appartamento non potrai più tornare indietro, confermi? 📛
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -108,13 +103,43 @@
                 </div>
             </div>
         </div>
-
         @empty
         <p>No apartments found.</p>
         @endforelse
-
     </div>
-
 </section>
+
+<style>
+    .pink {
+        background-color: #ff385c;
+        color: white;
+    }
+
+    .pink:hover {
+        color: #ff385c;
+        border: 1px solid #ff385c;
+        transform: scale(1.05);
+    }
+
+    .money {
+        background-color: gold;
+        color: #ff385c;
+    }
+
+    .money:hover {
+        color: #ff385c;
+        border: 1px solid #ff385c;
+        transform: scale(1.05);
+    }
+
+    .coverimage {
+        width: 100%;
+        height: 200px;
+    }
+
+    .h_80 {
+        height: 80px;
+    }
+</style>
 
 @endsection
