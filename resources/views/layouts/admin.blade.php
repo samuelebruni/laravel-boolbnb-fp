@@ -35,7 +35,7 @@
 <body>
     <div id="app">
 
-        <header class="navbar navbar-dark sticky-top bg-white flex-nowrap p-2 border-bottom mb-4" style="height:80px">
+        <header class="navbar sticky-top bg-white flex-nowrap p-2 border-bottom mb-4" style="height:80px">
 
             <a class="navbar-brand col-md-3 col-lg-2 me-0 pe-3" href="/"><img class="img_logo" src="{{url('/images/boolbnb.png')}}" alt=""></a>
             
