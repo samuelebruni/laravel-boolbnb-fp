@@ -2,10 +2,45 @@
 
 @section('content')
 
+
+<style>
+    .pink {
+        background-color: #ff385c;
+        color: white;
+    }
+
+    .pink:hover {
+        color: #ff385c;
+        border: 1px solid #ff385c;
+        transform: scale(1.05);
+    }
+
+    .money {
+        background-color: gold;
+        color: #ff385c;
+    }
+
+    .money:hover {
+        color: #ff385c;
+        border: 1px solid #ff385c;
+        transform: scale(1.05);
+    }
+    .coverimage{
+        width: 100%;
+        height: 200px;
+    }
+</style>
+
+
 <section class="container my-5">
-    <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex flex-sm-wrap justify-content-between mb-3">
         <h4 class="text-muted text-uppercase">All Apartments</h4>
-        <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment</a>
+
+        <div>
+            <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment </a>
+        </div>
+
+
     </div>
 
     <div class="my-1">
@@ -19,14 +54,14 @@
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
         @forelse ($apartments as $apartment)
-        <div class="col-sm-12 col-md-10 col-lg-4 col-xl-3">
+        <div class="col-sm-12 col-md-8 col-lg-12 d-flex">
             <div class="card">
                 <a href="{{route('admin.apartments.show', $apartment->slug)}}">
                     <img class="coverimage" src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
                 </a>
 
                 <div class="card-body">
-                    <h5 class="card-title h_80">{{$apartment->name}}</h5>
+                    <h5 class="card-title">{{$apartment->name}}</h5>
                     @if($apartment->visible)
                     <p class="text-success mt-3">Apartment is active</p>
                     @else
