@@ -36,10 +36,12 @@
     <div id="app">
 
         <header class="navbar navbar-dark sticky-top bg-white flex-nowrap p-2 border-bottom mb-4" style="height:80px">
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/"><img src="{{url('/images/boolbnb.png')}}" style="width: 150px" alt=""></a>
-            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 pe-3" href="/"><img class="img_logo" src="{{url('/images/boolbnb.png')}}" alt=""></a>
+            
+            <button id="menu_burger" class="navbar-toggler position-absolute pink d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+           
             <div class="navbar-nav">
                 <div class="nav-item text-nowrap ms-2">
                     <a class="nav-link text-black" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -51,6 +53,7 @@
                     </form>
                 </div>
             </div>
+        
         </header>
 
         <div class="container-fluid vh-100">
@@ -58,12 +61,12 @@
                 <!-- Definire solo parte del menu di navigazione inizialmente per poi
 								aggiungere i link necessari giorno per giorno
 								 -->
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block border  navbar-dark sidebar collapse">
-                    <div class="position-fixed pt-3">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block border-0 navbar-dark sidebar collapse margin_neg">
+                    <div class=" pt-1">
                         <ul class="nav flex-column">
                             <li class="nav-item">
 
-                                <a href="{{route('admin.dashboard')}}" class="nav-link gray ms-1">
+                                <a href="{{route('admin.dashboard')}}" class="nav-link gray mt-3 ms-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" width="30" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
                                         <path fill="#ff385c" d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H384V320c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v32h64V64L224 64v49.1C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352h53.3C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7H26.7C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z" />
                                     </svg> Dashboard
@@ -99,6 +102,9 @@
 
     </div>
     <style>
+        .pink{
+            background: #ff385c;
+        }
         .gray {
             color: #5C5C5C;
         }
@@ -110,6 +116,21 @@
 
         .border {
             border: #5C5C5C;
+        }
+        .img_logo{
+            width: 150px;
+            margin: 0 0 0 -1rem;
+        }
+        #menu_burger{
+            position: relative;
+            top: 15px;
+            left: 45%;
+        }
+        #sidebarMenu{
+            height: 180px;
+        }
+        .margin_neg{
+            margin: -2rem 0 0;
         }
     </style>
 </body>

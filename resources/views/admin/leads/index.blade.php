@@ -3,27 +3,30 @@
 @section('content')
     <style>
         .pink,
-        
+
         table {
             color: #ffffff !important;
             background: #ff385c !important;
             border: 1px solid #ff385c !important;
         }
-        th, td{
+
+        th,
+        td {
             height: 50px;
             display: flex;
             align-items: center;
         }
-        th{
+
+        th {
             background: #ff385c !important;
             color: #ffffff !important;
             border: 1px solid #ff385c !important;
         }
-
     </style>
 
+    <h2 class="fs-4 text-secondary pb-3 mt-3 mb-4">My Messages</h2>
+
     <div class="container-fl">
-        <h2 class="fs-4 text-secondary pt-4 my-4">My Messages</h2>
 
         @foreach ($leads as $message)
             @foreach ($apartments as $apartment)
