@@ -12,12 +12,14 @@
                 <div class="card-header bg-white">Apartments</div>
 
                 <div class="card-body">
-                    <h1>
+                    <a href="{{route('admin.apartments.index')}}">
+                        <h1>
 
-                        {{$allApartments}}
+                            {{$allApartments}}
 
 
-                    </h1>
+                        </h1>
+                    </a>
                 </div>
             </div>
         </div>
@@ -27,13 +29,13 @@
 
                 <div class="card-body ">
 
+                    <a href="{{route('admin.leads.index')}}">
 
+                        <h1>
 
-                    <h1>
-
-                        {{$allLeads}}
-                    </h1>
-
+                            {{$allLeads}}
+                        </h1>
+                    </a>
 
 
                 </div>
@@ -45,10 +47,25 @@
 
                 <div class="card-body">
 
+                    <a href="{{route('admin.transations.index')}}">
+                        <h1>
+                            {{$allTransations}}
+                        </h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm mt-3 col-lg-4">
+            <div class="card text-center">
+                <div class="card-header bg-white">Go to</div>
 
-                    <h1>
-                        {{$allTransations}}
-                    </h1>
+                <div class="card-body">
+
+                    <a href="http://localhost:5174/#/">
+                        <h1>
+                            Homepage
+                        </h1>
+                    </a>
                 </div>
             </div>
         </div>
@@ -56,16 +73,22 @@
 </div>
 
 <style>
-/*     .card-body {
+    /*     .card-body {
         color: #ff385c;
     } */
-    .card-header{
+    .card-header {
         color: #ffffff !important;
         background: #ff385c !important;
         border: 1px solid #ff385c !important;
     }
-    .card{
+
+    .card {
         border: 1px solid #ff385c !important;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
     }
 </style>
 @endsection
