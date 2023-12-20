@@ -131,6 +131,9 @@ class ApartmentController extends Controller
             // Rimuovi i servizi associati all'appartamento
             $apartment->services()->detach();
 
+             // Rimuovi la sponsorizzazione associata all'appartamento
+             $apartment->sponsorships()->detach();
+
             // Elimina tutte le immagini associate all'appartamento
             $apartment->images()->delete();
 
