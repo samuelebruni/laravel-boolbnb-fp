@@ -54,8 +54,8 @@
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
         @forelse ($apartments as $apartment)
-        <div class="col-sm-12 col-md-8 col-lg-12 d-flex">
-            <div class="card">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 d-flex">
+            <div class="card w-100">
                 <a href="{{route('admin.apartments.show', $apartment->slug)}}">
                     <img class="coverimage" src="{{ str_contains($apartment->cover_image, 'http') ? $apartment->cover_image : asset('storage/' . $apartment->cover_image) }}" class="card-img-top" alt="Apartment Image">
                 </a>
