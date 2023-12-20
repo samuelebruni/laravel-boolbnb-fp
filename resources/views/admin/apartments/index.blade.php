@@ -32,9 +32,9 @@
 </style>
 
 
-<section class="container my-5">
+<section class="container my-3">
     <div class="d-flex flex-sm-wrap justify-content-between mb-3">
-        <h4 class="text-muted text-uppercase">All Apartments</h4>
+        <h4 class="text-secondary text-uppercase pt-0 pb-0 mt-0 mb-4">All Apartments</h4>
 
         <div>
             <a href="{{route('admin.apartments.create')}}" class="btn pink">Add Apartment <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
